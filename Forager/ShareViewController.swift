@@ -35,6 +35,8 @@ class ShareViewController: UIViewController {
     var feedsLabelOrigin: CGPoint!
     var feedsInputOrigin: CGPoint!
     
+    var theSelectedRoom: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,8 +52,18 @@ class ShareViewController: UIViewController {
         feedsLabel.frame.origin.y = feedsLabelOrigin.y + 10
         
         titleInput.becomeFirstResponder()
+        
+        theSelectedRoom = ""
     }
     
+    
+    override func viewDidAppear(animated: Bool) {
+        if (theSelectedRoom == "") {
+            locationButton.setTitle("Location?", forState: UIControlState.Normal)
+        } else {
+            locationButton.setTitle(theSelectedRoom, forState: UIControlState.Normal)
+        }
+    }
     
 
     @IBAction func titleInputDidChange(sender: UITextField) {
@@ -146,7 +158,7 @@ class ShareViewController: UIViewController {
     
     
     func changedTheLocation() {
-        print('yep!')
+        print("yep!")
     }
     
     

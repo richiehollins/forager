@@ -47,6 +47,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         } else if (sender.tag == 8) {
             activeBuildingRoomArray = wc8Rooms
         }
+        tableView.reloadData()
         
     }
     
@@ -84,16 +85,16 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
         theSelectedRoom = currentCell.locationTableCellLabel.text!
         navigationController?.popViewControllerAnimated(true)
+        
     }
+    
+    
     
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let nextViewController = segue.destinationViewController as! ShareViewController
-        //nextViewController.locationButton.titleLabel = theSelectedRoom
-        nextViewController.locationButton.setTitle(theSelectedRoom, forState: UIControlState.Normal)
-        nextViewController.titleLabel.resignFirstResponder()
-        
+        nextViewController.theSelectedRoom = theSelectedRoom
     }
 
 
