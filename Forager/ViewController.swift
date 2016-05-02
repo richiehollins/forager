@@ -20,13 +20,19 @@ class ViewController: UIViewController {
         
     }
     
+    
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle { return UIStatusBarStyle.LightContent }
 
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
     @IBAction func didTapPull(sender: AnyObject) {
         /*PFQuery *query = [PFQuery queryWithClassName:@"TestObject"];
         [query getObjectInBackgroundWithId:@"xWMyZ4YEGZ" block:^(PFObject *gameScore, NSError *error) {

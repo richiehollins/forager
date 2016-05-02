@@ -18,7 +18,6 @@
 		3820693D1CD300FB0049F438 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820693C1CD300FB0049F438 /* CFNetwork.framework */; };
 		382069441CD3011E0049F438 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820693E1CD3011E0049F438 /* CoreGraphics.framework */; };
 		382069451CD3011E0049F438 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820693F1CD3011E0049F438 /* CoreLocation.framework */; };
-		382069461CD3011E0049F438 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382069401CD3011E0049F438 /* QuartzCore.framework */; };
 		382069471CD3011E0049F438 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382069411CD3011E0049F438 /* Security.framework */; };
 		382069481CD3011E0049F438 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382069421CD3011E0049F438 /* StoreKit.framework */; };
 		382069491CD3011E0049F438 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 382069431CD3011E0049F438 /* SystemConfiguration.framework */; };
@@ -29,6 +28,7 @@
 		386D33381CD661C1008FD64F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D33371CD661C1008FD64F /* HomeViewController.swift */; };
 		386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D33391CD66595008FD64F /* ShareViewController.swift */; };
 		386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D333B1CD6F4C7008FD64F /* LocationViewController.swift */; };
+		386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +56,7 @@
 		386D33371CD661C1008FD64F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		386D33391CD66595008FD64F /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		386D333B1CD6F4C7008FD64F /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,7 +68,6 @@
 				3820694B1CD301260049F438 /* libz.tbd in Frameworks */,
 				382069441CD3011E0049F438 /* CoreGraphics.framework in Frameworks */,
 				382069451CD3011E0049F438 /* CoreLocation.framework in Frameworks */,
-				382069461CD3011E0049F438 /* QuartzCore.framework in Frameworks */,
 				382069471CD3011E0049F438 /* Security.framework in Frameworks */,
 				382069481CD3011E0049F438 /* StoreKit.framework in Frameworks */,
 				382069491CD3011E0049F438 /* SystemConfiguration.framework in Frameworks */,
@@ -107,6 +107,7 @@
 				382069371CD2FCE80049F438 /* Parse.framework */,
 				382069281CD2F6E10049F438 /* Main.storyboard */,
 				386D333B1CD6F4C7008FD64F /* LocationViewController.swift */,
+				386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */,
 				386D33391CD66595008FD64F /* ShareViewController.swift */,
 				386D33371CD661C1008FD64F /* HomeViewController.swift */,
 				3820692B1CD2F6E10049F438 /* Assets.xcassets */,
@@ -209,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */,
 				386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */,
 				382069271CD2F6E10049F438 /* ViewController.swift in Sources */,
 				382069251CD2F6E10049F438 /* AppDelegate.swift in Sources */,

@@ -40,7 +40,6 @@ class ShareViewController: UIViewController {
         
         titleLabelOrigin = titleLabel.frame.origin
         titleInputOrigin = titleInput.frame.origin
-        print("titleInputOrigin at start: \(titleInputOrigin)")
         descriptionLabelOrigin = descriptionLabel.frame.origin
         descriptionInputOrigin = descriptionInput.frame.origin
         feedsLabelOrigin = feedsLabel.frame.origin
@@ -52,10 +51,10 @@ class ShareViewController: UIViewController {
         
         titleInput.becomeFirstResponder()
     }
+    
+    
 
     @IBAction func titleInputDidChange(sender: UITextField) {
-        print("titleinput change: \(self.titleInput.frame.origin.y)")
-
         if titleInput.hasText() {
             UIView.animateWithDuration(0.2, animations: {
                 self.titleInput.frame.origin.y = self.titleInputOrigin.y + 15
@@ -67,26 +66,13 @@ class ShareViewController: UIViewController {
             UIView.animateWithDuration(0.2, animations: {
                 self.titleLabel.alpha = 0
                 self.titleLabel.frame.origin.y = self.titleLabelOrigin.y + 10
-            })
-        }
-    }
-    
-    @IBAction func titleInputEditingDidEnd(sender: UITextField) {
-        print("titleinput: \(self.titleInput.frame.origin.y)")
-        if titleInput.hasText() {
-            UIView.animateWithDuration(0.2, animations: { 
-                self.titleInput.frame.origin.y = self.titleInputOrigin.y + 145
-                print("titleinput after hastext: \(self.titleInput.frame.origin.y)")
-
-            })
-        } else {
-            UIView.animateWithDuration(0.2, animations: {
-                self.titleLabel.alpha = 0
                 self.titleInput.frame.origin.y = self.titleInputOrigin.y
                 self.titleSupporter.alpha = 0.25
             })
         }
     }
+
+    
     
     
     @IBAction func descriptionInputDidChange(sender: UITextField) {
@@ -101,10 +87,15 @@ class ShareViewController: UIViewController {
             UIView.animateWithDuration(0.2, animations: {
                 self.descriptionLabel.alpha = 0
                 self.descriptionLabel.frame.origin.y = self.descriptionLabelOrigin.y + 10
+                self.descriptionInput.frame.origin.y = self.descriptionInputOrigin.y
+                self.descriptionSupporter.alpha = 0.25
             })
         }
     }
 
+    
+    
+    
     @IBAction func feedsInputDidChange(sender: AnyObject) {
         if feedsInput.hasText() {
             UIView.animateWithDuration(0.2, animations: { 
@@ -113,7 +104,8 @@ class ShareViewController: UIViewController {
                 self.feedsLabel.frame.origin.y = self.feedsLabelOrigin.y
             })
         } else {
-            UIView.animateWithDuration(0.2, animations: { 
+            UIView.animateWithDuration(0.2, animations: {
+                self.feedsInput.frame.origin.y = self.feedsInputOrigin.y
                 self.feedsLabel.alpha = 0
                 self.feedsLabel.frame.origin.y = self.feedsLabelOrigin.y + 10
             })
@@ -122,9 +114,13 @@ class ShareViewController: UIViewController {
     
     
     
+    
     @IBAction func tappedView(sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
+    
+    
+    
     
     @IBAction func tappedX(sender: AnyObject) {
         view.endEditing(true)
@@ -146,6 +142,13 @@ class ShareViewController: UIViewController {
             print("Object has been saved.")
         }
     }
+    
+    
+    
+    func changedTheLocation() {
+        print('yep!')
+    }
+    
     
     
     /*
