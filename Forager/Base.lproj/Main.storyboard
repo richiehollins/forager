@@ -30,6 +30,7 @@
             <string>GothamRounded-Medium</string>
             <string>GothamRounded-Medium</string>
             <string>GothamRounded-Medium</string>
+            <string>GothamRounded-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -155,7 +156,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" placeholder="How many foragers will it feed?" textAlignment="natural" minimumFontSize="15" id="kVB-lX-Vxd">
-                                <rect key="frame" x="15" y="146" width="290" height="30"/>
+                                <rect key="frame" x="15" y="147" width="290" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="0.00036244804505258799" green="0.092709563672542572" blue="0.16333761811256409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="18"/>
@@ -169,15 +170,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88589304685592651" green="0.89375990629196167" blue="0.91857784986495972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Si7-Tz-T4p" userLabel="Location Label">
-                                <rect key="frame" x="15" y="191" width="290" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Si7-Tz-T4p" userLabel="Location Label">
+                                <rect key="frame" x="15" y="189" width="290" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="12"/>
                                 <color key="textColor" red="0.00036244804505258799" green="0.092709563672542572" blue="0.16333761811256409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" alpha="0.25" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="J1x-4N-Nyx">
-                                <rect key="frame" x="15" y="195" width="290" height="30"/>
+                            <button opaque="NO" alpha="0.25" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" id="J1x-4N-Nyx">
+                                <rect key="frame" x="15" y="194" width="290" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="18"/>
                                 <state key="normal" title="Location?">
@@ -192,14 +193,36 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.88589304685592651" green="0.89375990629196167" blue="0.91857784986495972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vBd-ha-y0E" userLabel="Photo Label">
+                                <rect key="frame" x="15" y="242" width="290" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="12"/>
+                                <color key="textColor" red="0.00036244804505258799" green="0.092709563672542572" blue="0.16333761811256409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SE7-Tz-aut">
+                                <rect key="frame" x="15" y="270" width="290" height="217"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xfy-1T-zxP" userLabel="Trash Button">
+                                <rect key="frame" x="278" y="232" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="littleTrashCan"/>
+                                <connections>
+                                    <action selector="tappedTrashIcon:" destination="HfG-KW-LFE" eventType="touchUpInside" id="340-va-zGx"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="u1n-Wt-qoq">
-                                <rect key="frame" x="15" y="243" width="290" height="40"/>
+                                <rect key="frame" x="15" y="240" width="290" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="18"/>
                                 <inset key="titleEdgeInsets" minX="8" minY="2" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Add Photo" image="pinkCameraIcon">
                                     <color key="titleColor" red="0.94313788414001465" green="0.27563503384590149" blue="0.42811155319213867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedAddPhoto:" destination="HfG-KW-LFE" eventType="touchUpInside" id="8In-UZ-EN4"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -209,7 +232,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Share Scraps" id="qua-VQ-6cn">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="RYg-c1-Dbu">
+                        <barButtonItem key="leftBarButtonItem" image="x" style="plain" id="RYg-c1-Dbu">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pd2-jX-lCH">
                                 <rect key="frame" x="16" y="0.0" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -219,7 +242,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="dF6-u5-Pd4">
+                        <barButtonItem key="rightBarButtonItem" image="checkIcon" style="plain" id="dF6-u5-Pd4">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cYJ-Fw-EKd" userLabel="CheckButton">
                                 <rect key="frame" x="260" y="0.0" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -231,7 +254,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addPhotoButton" destination="u1n-Wt-qoq" id="rYw-1n-cP2"/>
                         <outlet property="checkButton" destination="cYJ-Fw-EKd" id="Nnc-Vl-CL9"/>
+                        <outlet property="deletePhotoButton" destination="xfy-1T-zxP" id="x2z-Xx-muc"/>
                         <outlet property="descriptionInput" destination="lpo-SL-aF9" id="FcD-7n-J2T"/>
                         <outlet property="descriptionLabel" destination="08T-1d-ffA" id="MNt-OG-lvs"/>
                         <outlet property="descriptionSupporter" destination="aGL-Xe-CU5" id="EKr-X3-fUK"/>
@@ -239,6 +264,8 @@
                         <outlet property="feedsLabel" destination="Gi9-at-yyS" id="Jan-7H-R5H"/>
                         <outlet property="locationButton" destination="J1x-4N-Nyx" id="SGt-ag-uev"/>
                         <outlet property="locationLabel" destination="Si7-Tz-T4p" id="tXt-KD-ThR"/>
+                        <outlet property="photoLabel" destination="vBd-ha-y0E" id="RND-VZ-Zac"/>
+                        <outlet property="photoPreview" destination="SE7-Tz-aut" id="kK7-P3-Tem"/>
                         <outlet property="titleInput" destination="XBZ-bW-QPD" id="vtX-B7-oXd"/>
                         <outlet property="titleLabel" destination="Ulf-i2-DH4" id="6eK-iD-k2z"/>
                         <outlet property="titleSupporter" destination="Gf6-oQ-Jh4" id="32q-fL-Dy6"/>
@@ -251,7 +278,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1127" y="-376"/>
+            <point key="canvasLocation" x="1005" y="-376"/>
         </scene>
         <!--Choose Location-->
         <scene sceneID="Adi-Ec-qVe">
@@ -397,7 +424,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Choose Location" id="7L9-Qi-e4m">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="ylP-vx-f9z">
+                        <barButtonItem key="leftBarButtonItem" image="backArrow" style="plain" id="ylP-vx-f9z">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MnC-32-OtJ">
                                 <rect key="frame" x="16" y="0.0" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -412,11 +439,19 @@
                         <outlet property="activeLocationIndicator" destination="Uvy-SX-wJ5" id="dXn-I5-4Kn"/>
                         <outlet property="buildingScroller" destination="6VL-8T-dcQ" id="zzk-hj-UFA"/>
                         <outlet property="tableView" destination="O8a-oL-KmB" id="hrv-Dt-VxV"/>
+                        <outlet property="wc1Button" destination="WAJ-vE-elz" id="aaK-P6-n7G"/>
+                        <outlet property="wc2Button" destination="01z-lo-Wzw" id="k5L-O0-1rk"/>
+                        <outlet property="wc3Button" destination="ddX-kX-oNd" id="LSQ-bp-GsO"/>
+                        <outlet property="wc4Button" destination="QAh-qS-5ni" id="uMH-Rn-6G7"/>
+                        <outlet property="wc5Button" destination="6gK-os-66K" id="PyF-C6-LZR"/>
+                        <outlet property="wc6Button" destination="2zV-eR-KCj" id="tGX-Pg-O89"/>
+                        <outlet property="wc7Button" destination="IsU-e9-7aC" id="Wz3-bS-hqL"/>
+                        <outlet property="wc8Button" destination="eFE-Hi-qco" id="6ye-M2-enk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXo-jp-qA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1634" y="-376"/>
+            <point key="canvasLocation" x="1422" y="-376"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q67-kj-NqX">
@@ -467,6 +502,7 @@
     <resources>
         <image name="backArrow" width="24" height="17"/>
         <image name="checkIcon" width="25" height="25"/>
+        <image name="littleTrashCan" width="18" height="20"/>
         <image name="pinkCameraIcon" width="24" height="20"/>
         <image name="plusIcon" width="25" height="25"/>
         <image name="x" width="21" height="21"/>

@@ -10,7 +10,11 @@ import UIKit
 import Parse
 import Bolts
 
-class ShareViewController: UIViewController {
+var selectedRoom: String!
+var selectedBuilding: String!
+var hasSelectedRoom: Bool!
+
+class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var checkButton: UIButton!
     
@@ -28,14 +32,20 @@ class ShareViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationButton: UIButton!
     
+    @IBOutlet weak var photoLabel: UILabel!
+    @IBOutlet weak var addPhotoButton: UIButton!
+    @IBOutlet weak var photoPreview: UIImageView!
+    @IBOutlet weak var deletePhotoButton: UIButton!
+    
     var titleLabelOrigin: CGPoint!
     var titleInputOrigin: CGPoint!
     var descriptionLabelOrigin: CGPoint!
     var descriptionInputOrigin: CGPoint!
     var feedsLabelOrigin: CGPoint!
     var feedsInputOrigin: CGPoint!
+    var locationButtonOrigin: CGPoint!
     
-    var theSelectedRoom: String!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +56,7 @@ class ShareViewController: UIViewController {
         descriptionInputOrigin = descriptionInput.frame.origin
         feedsLabelOrigin = feedsLabel.frame.origin
         feedsInputOrigin = feedsInput.frame.origin
+        locationButtonOrigin = locationButton.frame.origin
         
         titleLabel.frame.origin.y = titleLabelOrigin.y + 10
         descriptionLabel.frame.origin.y = descriptionLabelOrigin.y + 10
@@ -53,15 +64,21 @@ class ShareViewController: UIViewController {
         
         titleInput.becomeFirstResponder()
         
-        theSelectedRoom = ""
+        selectedRoom = ""
+        selectedBuilding = ""
+        hasSelectedRoom = false
     }
     
     
     override func viewDidAppear(animated: Bool) {
-        if (theSelectedRoom == "") {
+        if (selectedRoom == "") {
             locationButton.setTitle("Location?", forState: UIControlState.Normal)
         } else {
-            locationButton.setTitle(theSelectedRoom, forState: UIControlState.Normal)
+            locationButton.setTitle("\(selectedBuilding) • \(selectedRoom)", forState: UIControlState.Normal)
+            locationButton.alpha = 1
+            locationButton.frame.origin.y = locationButtonOrigin.y + 6
+            locationLabel.alpha = 0.25
+            view.endEditing(true)
         }
     }
     
@@ -144,24 +161,92 @@ class ShareViewController: UIViewController {
     
     
     @IBAction func tappedCheck(sender: AnyObject) {
-        let scrapObject = PFObject(className: "Scrap")
-        scrapObject["title"] = titleInput.text
-        scrapObject["description"] = descriptionInput.text
-        scrapObject["feeds"] = Int(feedsInput.text!)
-        scrapObject["building"] = "WC5"
-        scrapObject["room"] = "1101: Room"
-        scrapObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
-            print("Object has been saved.")
+        if (titleInput.hasText() && feedsInput.hasText() && hasSelectedRoom==true) {
+            let scrapObject = PFObject(className: "Scrap")
+            scrapObject["title"] = titleInput.text
+            scrapObject["description"] = descriptionInput.text
+            scrapObject["feeds"] = Int(feedsInput.text!)
+            scrapObject["building"] = selectedBuilding
+            scrapObject["room"] = selectedRoom
+            scrapObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
+                print("Object has been saved.")
+            }
+        } else {
+            showErrorAlert()
         }
     }
     
     
     
-    func changedTheLocation() {
-        print("yep!")
+    @IBAction func tappedAddPhoto(sender: AnyObject) {
+        view.endEditing(true)
+        showAddPhotoActionSheet()
     }
     
     
+    func showAddPhotoActionSheet() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (action) in }
+        let takeNewAction = UIAlertAction(title: "Take New", style: .Default) { (action) in
+            let camera = UIImagePickerController()
+            camera.delegate = self
+            camera.sourceType = .Camera
+            
+            self.presentViewController(camera, animated: true, completion: nil)
+        }
+        let useExistingAction = UIAlertAction(title: "Use Existing", style: .Default) { (action) in
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType = .PhotoLibrary
+            
+            self.presentViewController(picker, animated: true, completion: nil)
+            picker.navigationBar.translucent = false
+            picker.navigationBar.backgroundColor = UIColor(red: 68/255, green: 189/255, blue: 236/255, alpha: 1.0)
+            picker.navigationBar.barTintColor = UIColor(red: 68/255, green: 189/255, blue: 236/255, alpha: 1.0)
+            picker.navigationBar.tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)
+            
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(takeNewAction)
+        alertController.addAction(useExistingAction)
+        
+        presentViewController(alertController, animated: true) { 
+            // what to do once it's been presented
+        }
+    }
+    
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        photoPreview.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        dismissViewControllerAnimated(true) { 
+            self.photoPreview.alpha = 1
+            self.addPhotoButton.alpha = 0
+            self.photoLabel.alpha = 0.25
+            self.deletePhotoButton.alpha = 1
+        }
+    }
+    
+    
+    
+    @IBAction func tappedTrashIcon(sender: AnyObject) {
+        photoPreview.image = nil
+        photoPreview.alpha = 0
+        deletePhotoButton.alpha = 0
+        photoLabel.alpha = 0
+        addPhotoButton.alpha = 1
+    }
+    
+    
+    
+    func showErrorAlert() {
+        let alertController = UIAlertController(title: "Slow down there, Sparky.", message: "Can't share a scrap until you've at least added a title, location, and how many folks it will feed.", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Alrighty", style: .Cancel) { (action) in
+            self.titleInput.isFirstResponder()
+        }
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     /*
     // MARK: - Navigation
