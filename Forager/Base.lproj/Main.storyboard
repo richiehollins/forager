@@ -31,6 +31,8 @@
             <string>GothamRounded-Medium</string>
             <string>GothamRounded-Medium</string>
             <string>GothamRounded-Medium</string>
+            <string>GothamRounded-Medium</string>
+            <string>GothamRounded-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -42,26 +44,53 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Azc-md-KzR">
-                                <rect key="frame" x="119" y="194" width="83" height="30"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" id="EGk-3q-Gtb">
+                                <rect key="frame" x="15" y="30" width="290" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="15"/>
-                                <state key="normal" title="Push it"/>
-                                <connections>
-                                    <action selector="didTapGo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cve-wI-PDc"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ThE-WM-TYT">
-                                <rect key="frame" x="121" y="309" width="79" height="30"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GCu-cn-93s">
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="125"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FCs-WF-vdB">
+                                        <rect key="frame" x="8" y="133" width="224" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="18"/>
+                                        <color key="textColor" red="0.00036244804505258799" green="0.092709563672542572" blue="0.16333761811256409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ppl-wU-nWA">
+                                        <rect key="frame" x="8" y="151" width="224" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="12"/>
+                                        <color key="textColor" red="0.45651298761367798" green="0.51960372924804688" blue="0.6317906379699707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BfA-Nz-Rww">
+                                        <rect key="frame" x="240" y="151" width="42" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="12"/>
+                                        <color key="textColor" red="0.94313788414001465" green="0.27563503384590149" blue="0.42811155319213867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HdR-gN-Tf7">
+                                        <rect key="frame" x="236" y="127" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="-18" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" image="littlePinkOutlineRicky"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lJT-k2-mQS">
+                                <rect key="frame" x="23" y="11" width="277" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="15"/>
-                                <state key="normal" title="Pull it"/>
-                                <connections>
-                                    <action selector="didTapPull:" destination="BYZ-38-t0r" eventType="touchUpInside" id="edY-BP-Qlf"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" name="GothamRounded-Medium" family="Gotham Rounded" pointSize="12"/>
+                                <color key="textColor" red="0.45651298761367798" green="0.51960372924804688" blue="0.6317906379699707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.88589304685592651" green="0.89375990629196167" blue="0.91857784986495972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Scraps" id="gUc-Xz-zv0">
@@ -76,11 +105,19 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="sampleCard" destination="EGk-3q-Gtb" id="gA8-Ok-f9j"/>
+                        <outlet property="sampleFeedsCounter" destination="BfA-Nz-Rww" id="Zgy-0J-OIP"/>
+                        <outlet property="sampleImageView" destination="GCu-cn-93s" id="9Pm-Ue-nYl"/>
+                        <outlet property="sampleLocation" destination="ppl-wU-nWA" id="RvT-Nk-qeJ"/>
+                        <outlet property="sampleTime" destination="lJT-k2-mQS" id="xio-Qt-vID"/>
+                        <outlet property="sampleTitle" destination="FCs-WF-vdB" id="yiG-Xv-fT0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595.73333333333335" y="298.19999999999999"/>
+            <point key="canvasLocation" x="595" y="298"/>
         </scene>
         <!--Share Scraps-->
         <scene sceneID="sab-OU-DLA">
@@ -200,8 +237,8 @@
                                 <color key="textColor" red="0.00036244804505258799" green="0.092709563672542572" blue="0.16333761811256409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SE7-Tz-aut">
-                                <rect key="frame" x="15" y="270" width="290" height="217"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="SE7-Tz-aut">
+                                <rect key="frame" x="15" y="270" width="290" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xfy-1T-zxP" userLabel="Trash Button">
@@ -502,6 +539,7 @@
     <resources>
         <image name="backArrow" width="24" height="17"/>
         <image name="checkIcon" width="25" height="25"/>
+        <image name="littlePinkOutlineRicky" width="23" height="18"/>
         <image name="littleTrashCan" width="18" height="20"/>
         <image name="pinkCameraIcon" width="24" height="20"/>
         <image name="plusIcon" width="25" height="25"/>

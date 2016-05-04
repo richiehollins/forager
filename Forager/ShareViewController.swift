@@ -45,7 +45,7 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     var feedsInputOrigin: CGPoint!
     var locationButtonOrigin: CGPoint!
     
-    
+    var scrapImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,12 +162,16 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBAction func tappedCheck(sender: AnyObject) {
         if (titleInput.hasText() && feedsInput.hasText() && hasSelectedRoom==true) {
+            let imageData = UIImageJPEGRepresentation(scrapImage, 0.5)
+            let imageFile = PFFile(name:"image.png", data:imageData!)
+            
             let scrapObject = PFObject(className: "Scrap")
             scrapObject["title"] = titleInput.text
             scrapObject["description"] = descriptionInput.text
             scrapObject["feeds"] = Int(feedsInput.text!)
             scrapObject["building"] = selectedBuilding
             scrapObject["room"] = selectedRoom
+            scrapObject["image"] = imageFile
             scrapObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 print("Object has been saved.")
             }
@@ -223,6 +227,8 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
             self.addPhotoButton.alpha = 0
             self.photoLabel.alpha = 0.25
             self.deletePhotoButton.alpha = 1
+            
+            self.scrapImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         }
     }
     
