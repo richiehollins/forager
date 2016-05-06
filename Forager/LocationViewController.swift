@@ -34,6 +34,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     var activeBuildingRoomArray: [String]!
     
     
+    @IBOutlet weak var activeLocationLeftMargin: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,6 +112,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func didChangeLocation(sender: AnyObject) {
         UIView.animateWithDuration(0.3) {
             self.activeLocationIndicator.frame.origin.x = sender.frame.origin.x
+            //self.activeLocationLeftMargin.constant = sender.frame.origin.x
+            //self.buildingScroller.layoutIfNeeded()
         }
         if ( sender.tag == 1 ) {
             activeBuildingRoomArray = wc1Rooms
