@@ -23,6 +23,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     var objects: [PFObject]! = [PFObject]()
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,59 +39,12 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
-        query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            
+        //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.objects = objects
             self.tableView.reloadData()
         }
 
-        /*
-        let query = PFQuery(className: "Scrap")
-        query.whereKey("title", containsString: "Lego")
-        query.findObjectsInBackgroundWithBlock {
-            (objects: [PFObject]?, error: NSError?) -> Void in
-            
-            if error == nil {
-                // The find succeeded.
-                print("Successfully retrieved \(objects!.count) scores.")
-                // Do something with the found objects
-                if let objects = objects {
-                    for object in objects {
-                        
-                        let time = object.createdAt!
-                        let dateFormatter = NSDateFormatter()
-                        dateFormatter.dateFormat = "h:mm a"
-                        let timeString = dateFormatter.stringFromDate(time)
-                        
-                        let title = object["title"] as! String
-                        let building = object["building"] as! String
-                        let room = object["room"] as! String
-                        let feeds = object["feeds"].stringValue
-                        
-                        let imageFile = object["image"] as? PFFile
-                        imageFile!.getDataInBackgroundWithBlock {
-                            (imageData: NSData?, error: NSError?) -> Void in
-                            if error == nil {
-                                if let imageData = imageData {
-                                    let image = UIImage(data:imageData)
-                                    self.sampleImageView.image = image
-                                }
-                            }
-                        }
-                        
-                        self.sampleTitle.text = title
-                        self.sampleLocation.text = "\(building) • \(room)"
-                        self.sampleFeedsCounter.text = feeds
-                        self.sampleTime.text = timeString
-                    }
-                }
-            } else {
-                // Log details of the failure
-                print("Error: \(error!) \(error!.userInfo)")
-            }
-        }*/
     }
     
     
