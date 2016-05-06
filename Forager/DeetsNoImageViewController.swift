@@ -1,25 +1,21 @@
 //
-//  DeetsViewController.swift
+//  DeetsNoImageViewController.swift
 //  Forager
 //
-//  Created by Hollins, Richie on 5/5/16.
+//  Created by Hollins, Richie on 5/6/16.
 //  Copyright © 2016 Hollins, Richie. All rights reserved.
 //
 
 import UIKit
-import Parse
-import Bolts
 
-class DeetsViewController: UIViewController {
+class DeetsNoImageViewController: UIViewController {
     
-    var imagePassed: UIImage!
     var timePassed: String!
     var titlePassed: String!
     var descriptionPassed: String!
     var locationPassed: String!
     var feedsPassed: String!
 
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var theTitle: UILabel!
     @IBOutlet weak var theDescription: UILabel!
     @IBOutlet weak var theTime: UILabel!
@@ -27,14 +23,11 @@ class DeetsViewController: UIViewController {
     @IBOutlet weak var theFeeds: UILabel!
     @IBOutlet weak var theButton: UIButton!
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        theButton.layer.cornerRadius = 10
 
-        imageView.image = imagePassed
+        theButton.layer.cornerRadius = 10
+        
         theTitle.text = titlePassed
         theDescription.text = descriptionPassed
         theTime.text = timePassed
@@ -42,12 +35,15 @@ class DeetsViewController: UIViewController {
         theFeeds.text = "FEEDS \(feedsPassed)"
     }
 
-
-    
-    @IBAction func tappedBack(sender: AnyObject) {
-        navigationController?.popViewControllerAnimated(true)
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
+
+    @IBAction func goingBack(sender: AnyObject) {
+        navigationController?.popViewControllerAnimated(true)
+    }
     
     
     /*

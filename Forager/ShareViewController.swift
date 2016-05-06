@@ -162,18 +162,35 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBAction func tappedCheck(sender: AnyObject) {
         if (titleInput.hasText() && feedsInput.hasText() && hasSelectedRoom==true) {
-            let imageData = UIImageJPEGRepresentation(scrapImage, 0.5)
-            let imageFile = PFFile(name:"image.png", data:imageData!)
             
             let scrapObject = PFObject(className: "Scrap")
+            
             scrapObject["title"] = titleInput.text
             scrapObject["description"] = descriptionInput.text
             scrapObject["feeds"] = Int(feedsInput.text!)
             scrapObject["building"] = selectedBuilding
             scrapObject["room"] = selectedRoom
-            scrapObject["image"] = imageFile
+            
+            var imageFile: PFFile!
+            if (scrapImage != nil) {
+                let scale = 1000 / scrapImage.size.width
+                let newHeight = scrapImage.size.height * scale
+                UIGraphicsBeginImageContext(CGSizeMake(1000, newHeight))
+                scrapImage.drawInRect(CGRectMake(0, 0, 1000, newHeight))
+                let newImage = UIGraphicsGetImageFromCurrentImageContext()
+                UIGraphicsEndImageContext()
+                
+                let imageData = UIImageJPEGRepresentation(newImage, 0.5)
+                imageFile = PFFile(name:"image.png", data:imageData!)
+                
+                scrapObject["image"] = imageFile
+            }
+            
             scrapObject.saveInBackgroundWithBlock { (success: Bool, error: NSError?) -> Void in
                 print("Object has been saved.")
+                self.dismissViewControllerAnimated(true, completion: { 
+                    print("success!")
+                })
             }
         } else {
             showErrorAlert()
