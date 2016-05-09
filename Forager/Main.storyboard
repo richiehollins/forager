@@ -91,7 +91,14 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G6O-b2-j2F">
-                                                            <rect key="frame" x="0.0" y="42" width="290" height="46"/>
+                                                            <rect key="frame" x="5" y="42" width="276" height="46"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sk9-ie-TDK">
+                                                            <rect key="frame" x="5" y="8" width="276" height="46"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -109,6 +116,9 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="-18" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" image="littlePinkOutlineRicky"/>
+                                                            <connections>
+                                                                <action selector="tappedTakeScrapWithImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ba1-tF-cbi"/>
+                                                            </connections>
                                                         </button>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0YH-pJ-Mph" userLabel="scrapImage">
                                                             <rect key="frame" x="0.0" y="0.0" width="290" height="125"/>
@@ -131,8 +141,10 @@
                                         <connections>
                                             <outlet property="descriptionLabel" destination="G6O-b2-j2F" id="bFQ-NP-qj1"/>
                                             <outlet property="feedsLabel" destination="ejs-a0-kbs" id="DIr-ey-LNg"/>
+                                            <outlet property="idLabel" destination="sk9-ie-TDK" id="461-Lz-yEc"/>
                                             <outlet property="locationLabel" destination="aWZ-on-4OD" id="Z8Y-77-6hq"/>
                                             <outlet property="scrapImage" destination="0YH-pJ-Mph" id="09i-Lh-1gc"/>
+                                            <outlet property="takeScrapButton" destination="dZX-ux-Nth" id="eLK-HC-q5q"/>
                                             <outlet property="theCard" destination="YrD-lD-k7z" id="naj-lM-J4N"/>
                                             <outlet property="timeLabel" destination="CHX-42-25n" id="uIU-pU-Liy"/>
                                             <outlet property="titleLabel" destination="HIg-Fa-fQs" id="K9R-u3-sac"/>
@@ -163,6 +175,13 @@
                                                             <color key="textColor" red="0.45651298759999998" green="0.51960372919999998" blue="0.63179063800000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wZh-UD-DRB">
+                                                            <rect key="frame" x="0.0" y="5" width="290" height="46"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MeZ-VO-87T">
                                                             <rect key="frame" x="0.0" y="2" width="290" height="46"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -182,6 +201,9 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="-18" maxX="0.0" maxY="0.0"/>
                                                             <state key="normal" image="littlePinkOutlineRicky"/>
+                                                            <connections>
+                                                                <action selector="tappedTakeScrapNoImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a4T-P0-59v"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -200,7 +222,9 @@
                                         <connections>
                                             <outlet property="descriptionLabel" destination="MeZ-VO-87T" id="vKP-Fj-q1O"/>
                                             <outlet property="feedsLabel" destination="e3S-sU-gca" id="cyY-kp-aae"/>
+                                            <outlet property="idLabel" destination="wZh-UD-DRB" id="h8D-8H-L3x"/>
                                             <outlet property="locationLabel" destination="X3x-qW-ce4" id="Qa6-6m-wKQ"/>
+                                            <outlet property="takeScrapButton" destination="jvs-Ll-63S" id="m0Z-l7-Oo1"/>
                                             <outlet property="theCard" destination="pQv-Hg-blT" id="rYV-TL-AeD"/>
                                             <outlet property="timeLabel" destination="dJC-P3-C15" id="7pw-HP-Xtl"/>
                                             <outlet property="titleLabel" destination="6VZ-KB-294" id="Eba-dj-t67"/>
@@ -307,6 +331,9 @@
                                 <state key="normal" title="Take a scrap" image="ricky_white">
                                     <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedTakeScrap:" destination="aaA-3J-0dv" eventType="touchUpInside" id="xV6-pJ-HH0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.88589304685592651" green="0.89375990629196167" blue="0.91857784986495972" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -657,7 +684,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jum-RJ-uym" id="nkL-aT-2qS">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdV-gL-1mh">
@@ -821,6 +848,9 @@
                                 <state key="normal" title="Take a scrap" image="ricky_white">
                                     <color key="titleColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="tappedTakeScrap:" destination="ic6-Ae-27c" eventType="touchUpInside" id="zXI-1d-2C6"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.88589304690000004" green="0.89375990630000002" blue="0.91857784990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -18,6 +18,8 @@ class DeetsViewController: UIViewController {
     var descriptionPassed: String!
     var locationPassed: String!
     var feedsPassed: String!
+    var feedsPassedInt: Int!
+    var objectIDPassed: String!
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var theTitle: UILabel!
@@ -40,15 +42,37 @@ class DeetsViewController: UIViewController {
         theTime.text = timePassed
         theLocation.text = locationPassed
         theFeeds.text = "FEEDS \(feedsPassed)"
+        feedsPassedInt = Int(feedsPassed)
     }
 
 
     
     @IBAction func tappedBack(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
+        
     }
     
     
+    
+    
+    @IBAction func tappedTakeScrap(sender: AnyObject) {
+        feedsPassedInt = feedsPassedInt - 1
+        feedsPassed = String(feedsPassedInt)
+
+        
+        let query = PFQuery(className:"Scrap")
+        query.getObjectInBackgroundWithId(objectIDPassed) {
+            (scrapObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+            } else if let scrapObject = scrapObject {
+                scrapObject["feeds"] = self.feedsPassedInt
+                scrapObject.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                self.theFeeds.text = "FEEDS \(self.feedsPassed)"
+                })
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation

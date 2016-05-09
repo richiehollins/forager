@@ -20,6 +20,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var descriptionToPass: String!
     var feedsToPass: String!
     var locationToPass: String!
+    var objectIDToPass: String!
     
     var objects: [PFObject]! = [PFObject]()
     
@@ -59,7 +60,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     override func viewWillAppear(animated: Bool) {
-        self.tableView.reloadData()
+        let query = PFQuery(className:"Scrap")
+        query.orderByDescending("createdAt")
+        //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+            self.objects = objects
+            self.tableView.reloadData()
+        }
     }
     
     
@@ -96,12 +103,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let room = objects[indexPath.row]["room"] as! String
             let feeds = objects[indexPath.row]["feeds"].stringValue
             let description = objects[indexPath.row]["description"] as! String
+            let objectID = objects[indexPath.row].objectId
             
             cell.timeLabel.text = timeString
             cell.titleLabel.text = title
             cell.locationLabel.text = "\(building) • \(room)".uppercaseString
             cell.feedsLabel.text = feeds
             cell.descriptionLabel.text = description
+            cell.idLabel.text = objectID
+            cell.takeScrapButton.tag = indexPath.row
             
             return cell
             
@@ -119,12 +129,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let room = objects[indexPath.row]["room"] as! String
             let feeds = objects[indexPath.row]["feeds"].stringValue
             let description = objects[indexPath.row]["description"] as! String
+            let objectID = objects[indexPath.row].objectId
             
             cell.timeLabel.text = timeString
             cell.titleLabel.text = title
             cell.locationLabel.text = "\(building) • \(room)".uppercaseString
             cell.feedsLabel.text = feeds
             cell.descriptionLabel.text = description
+            cell.idLabel.text = objectID
+            cell.takeScrapButton.tag = indexPath.row
             
             return cell
         }
@@ -147,6 +160,58 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
+    
+    @IBAction func tappedTakeScrapWithImage(sender: AnyObject) {
+        var objectID: String!
+        let selectedRowIndex = sender.tag
+        let selectedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedRowIndex, inSection: 0)) as! HomeTableViewCell
+        objectID = selectedCell.idLabel.text
+        let feeds = selectedCell.feedsLabel.text
+        var feedsInt = Int(feeds!)
+        feedsInt = feedsInt! - 1
+        
+        let query = PFQuery(className:"Scrap")
+        query.getObjectInBackgroundWithId(objectID) {
+            (scrapObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+            } else if let scrapObject = scrapObject {
+                scrapObject["feeds"] = feedsInt
+                scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                    selectedCell.feedsLabel.text = String(feedsInt!)
+                })
+            }
+        }
+        
+    }
+    
+    @IBAction func tappedTakeScrapNoImage(sender: AnyObject) {
+        var objectID: String!
+        let selectedRowIndex = sender.tag
+        let selectedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedRowIndex, inSection: 0)) as! HomeNoImageTableViewCell
+        objectID = selectedCell.idLabel.text
+        let feeds = selectedCell.feedsLabel.text
+        var feedsInt = Int(feeds!)
+        feedsInt = feedsInt! - 1
+        
+        let query = PFQuery(className:"Scrap")
+        query.getObjectInBackgroundWithId(objectID) {
+            (scrapObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+            } else if let scrapObject = scrapObject {
+                scrapObject["feeds"] = feedsInt
+                scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                    selectedCell.feedsLabel.text = String(feedsInt!)
+                })
+            }
+        }
+    }
+    
+    
+    
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let indexPath = tableView.indexPathForSelectedRow!
         
@@ -161,6 +226,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             descriptionToPass = currentCell.descriptionLabel.text
             feedsToPass = currentCell.feedsLabel.text
             locationToPass = currentCell.locationLabel.text
+            objectIDToPass = currentCell.idLabel.text
             
             self.performSegueWithIdentifier("ShowCellDeets", sender: self)
         } else {
@@ -171,6 +237,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             descriptionToPass = currentCell.descriptionLabel.text
             feedsToPass = currentCell.feedsLabel.text
             locationToPass = currentCell.locationLabel.text
+            objectIDToPass = currentCell.idLabel.text
             
             self.performSegueWithIdentifier("NoImageShowCellDeets", sender: self)
         }
@@ -188,6 +255,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             destinationVC.descriptionPassed = descriptionToPass
             destinationVC.feedsPassed = feedsToPass
             destinationVC.locationPassed = locationToPass
+            destinationVC.objectIDPassed = objectIDToPass
         } else if (segue.identifier == "NoImageShowCellDeets") {
             let destinationVC = segue.destinationViewController as! DeetsNoImageViewController
             
@@ -196,6 +264,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             destinationVC.descriptionPassed = descriptionToPass
             destinationVC.feedsPassed = feedsToPass
             destinationVC.locationPassed = locationToPass
+            destinationVC.objectIDPassed = objectIDToPass
         }
     }
     

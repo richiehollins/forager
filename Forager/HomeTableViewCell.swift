@@ -18,6 +18,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var feedsLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var theCard: UIView!
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var takeScrapButton: UIButton!
     
     
     override func awakeFromNib() {

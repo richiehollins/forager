@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 class DeetsNoImageViewController: UIViewController {
     
@@ -15,6 +17,8 @@ class DeetsNoImageViewController: UIViewController {
     var descriptionPassed: String!
     var locationPassed: String!
     var feedsPassed: String!
+    var feedsPassedInt: Int!
+    var objectIDPassed: String!
 
     @IBOutlet weak var theTitle: UILabel!
     @IBOutlet weak var theDescription: UILabel!
@@ -33,6 +37,7 @@ class DeetsNoImageViewController: UIViewController {
         theTime.text = timePassed
         theLocation.text = locationPassed
         theFeeds.text = "FEEDS \(feedsPassed)"
+        feedsPassedInt = Int(feedsPassed)
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,6 +50,23 @@ class DeetsNoImageViewController: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     
+    @IBAction func tappedTakeScrap(sender: AnyObject) {
+        feedsPassedInt = feedsPassedInt - 1
+        feedsPassed = String(feedsPassedInt)
+        
+        let query = PFQuery(className:"Scrap")
+        query.getObjectInBackgroundWithId(objectIDPassed) {
+            (scrapObject: PFObject?, error: NSError?) -> Void in
+            if error != nil {
+                print(error)
+            } else if let scrapObject = scrapObject {
+                scrapObject["feeds"] = self.feedsPassedInt
+                scrapObject.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                    self.theFeeds.text = "FEEDS \(self.feedsPassed)"
+                })
+            }
+        }
+    }
     
     /*
     // MARK: - Navigation
