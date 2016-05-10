@@ -161,7 +161,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
-    @IBAction func tappedTakeScrapWithImage(sender: AnyObject) {
+    @IBAction func tappedTakeScrapWithImage(sender: UIButton) {
         var objectID: String!
         let selectedRowIndex = sender.tag
         let selectedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedRowIndex, inSection: 0)) as! HomeTableViewCell
@@ -169,23 +169,66 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let feeds = selectedCell.feedsLabel.text
         var feedsInt = Int(feeds!)
         feedsInt = feedsInt! - 1
+
+        /* do the fancy image popping animation
+        sender.selected = true
+        let imagePopper = sender.imageView as UIImageView!
+        let imagePopperImage = UIImageView(image: imagePopper.image)
+        view.addSubview(imagePopperImage)
+        imagePopperImage.frame = sender.frame
+        imagePopperImage.center = sender.center
+        imagePopperImage.center.y += selectedCell.theCard.frame.origin.y
+        imagePopperImage.center.x += selectedCell.theCard.frame.origin.x
         
-        let query = PFQuery(className:"Scrap")
-        query.getObjectInBackgroundWithId(objectID) {
-            (scrapObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-            } else if let scrapObject = scrapObject {
-                scrapObject["feeds"] = feedsInt
-                scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
-                    selectedCell.feedsLabel.text = String(feedsInt!)
-                })
+        UIView.animateWithDuration(0.2, animations: {
+            imagePopperImage.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            imagePopperImage.alpha = 0
+        }) { (Bool) in
+            imagePopperImage.removeFromSuperview()
+        }*/
+        
+        if feedsInt! == 0 {
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectID) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        UIView.animateWithDuration(0.3, animations: { 
+                            selectedCell.frame.origin.x = -320
+                            selectedCell.alpha = 0
+                            }, completion: { (Bool) in
+                                let query = PFQuery(className:"Scrap")
+                                query.orderByDescending("createdAt")
+                                //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+                                query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+                                    self.objects = objects
+                                    self.tableView.reloadData()
+                                }
+                        })
+                        //self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:selectedRowIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    })
+                }
+            }
+        } else {
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectID) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject["feeds"] = feedsInt
+                    scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        selectedCell.feedsLabel.text = String(feedsInt!)
+                    })
+                }
             }
         }
         
     }
     
-    @IBAction func tappedTakeScrapNoImage(sender: AnyObject) {
+    @IBAction func tappedTakeScrapNoImage(sender: UIButton) {
         var objectID: String!
         let selectedRowIndex = sender.tag
         let selectedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: selectedRowIndex, inSection: 0)) as! HomeNoImageTableViewCell
@@ -194,16 +237,59 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var feedsInt = Int(feeds!)
         feedsInt = feedsInt! - 1
         
-        let query = PFQuery(className:"Scrap")
-        query.getObjectInBackgroundWithId(objectID) {
-            (scrapObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-            } else if let scrapObject = scrapObject {
-                scrapObject["feeds"] = feedsInt
-                scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
-                    selectedCell.feedsLabel.text = String(feedsInt!)
-                })
+        /* do the fancy image popping animation
+        sender.selected = true
+        let imagePopper = sender.imageView as UIImageView!
+        let imagePopperImage = UIImageView(image: imagePopper.image)
+        view.addSubview(imagePopperImage)
+        imagePopperImage.frame = sender.frame
+        imagePopperImage.center = sender.center
+        imagePopperImage.center.y += selectedCell.theCard.frame.origin.y
+        imagePopperImage.center.x += selectedCell.theCard.frame.origin.x
+        
+        UIView.animateWithDuration(0.2, animations: {
+            imagePopperImage.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            imagePopperImage.alpha = 0
+            }) { (Bool) in
+                imagePopperImage.removeFromSuperview()
+        }*/
+        
+        if feedsInt! == 0 { // if no scraps are left, delete that shit!
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectID) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        UIView.animateWithDuration(0.3, animations: {
+                            selectedCell.frame.origin.x = -320
+                            selectedCell.alpha = 0
+                            }, completion: { (Bool) in
+                                let query = PFQuery(className:"Scrap")
+                                query.orderByDescending("createdAt")
+                                //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+                                query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+                                    self.objects = objects
+                                    self.tableView.reloadData()
+                                }
+                        })
+                        //self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:selectedRowIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+                    })
+                }
+            }
+        } else {
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectID) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject["feeds"] = feedsInt
+                    scrapObject.saveInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        selectedCell.feedsLabel.text = String(feedsInt!)
+                    })
+                }
             }
         }
     }
