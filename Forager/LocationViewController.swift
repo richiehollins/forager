@@ -39,7 +39,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        buildingScroller.contentSize = CGSize(width: 480, height: 40)
+        //buildingScroller.contentSize = CGSize(width: 480, height: 40)
+        buildingScroller.backgroundColor = UIColor(red: 45/255, green: 150/255, blue: 192/255, alpha: 1.0)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -65,45 +66,53 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidAppear(animated: Bool) {
         if (selectedBuilding == "WC1") {
             UIView.animateWithDuration(0.3, animations: { 
-                self.activeLocationIndicator.frame.origin.x = self.wc1Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc1Button.frame.origin.x
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc1Rooms
         } else if (selectedBuilding == "WC2") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc2Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc2Button.frame.origin.x
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc2Rooms
         } else if (selectedBuilding == "WC3") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc3Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc3Button.frame.origin.x
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc3Rooms
         } else if (selectedBuilding == "WC4") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc4Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc4Button.frame.origin.x
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc4Rooms
         } else if (selectedBuilding == "WC5") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc5Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc5Button.frame.origin.x
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc5Rooms
         } else if (selectedBuilding == "WC6") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc6Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc6Button.frame.origin.x
                 self.buildingScroller.contentOffset.x = self.wc6Button.frame.origin.x - 200
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc6Rooms
         } else if (selectedBuilding == "WC7") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc7Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc7Button.frame.origin.x
                 self.buildingScroller.contentOffset.x = self.wc7Button.frame.origin.x - 200
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc7Rooms
         } else if (selectedBuilding == "WC8") {
             UIView.animateWithDuration(0.3, animations: {
-                self.activeLocationIndicator.frame.origin.x = self.wc8Button.frame.origin.x
+                self.activeLocationLeftMargin.constant = self.wc8Button.frame.origin.x
                 self.buildingScroller.contentOffset.x = self.wc8Button.frame.origin.x - 200
+                self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc8Rooms
         }
@@ -115,9 +124,9 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     
     @IBAction func didChangeLocation(sender: AnyObject) {
         UIView.animateWithDuration(0.3) {
-            self.activeLocationIndicator.frame.origin.x = sender.frame.origin.x
-            //self.activeLocationLeftMargin.constant = sender.frame.origin.x
-            //self.buildingScroller.layoutIfNeeded()
+            //self.activeLocationIndicator.frame.origin.x = sender.frame.origin.x
+            self.activeLocationLeftMargin.constant = sender.frame.origin.x
+            self.buildingScroller.layoutIfNeeded()
         }
         if ( sender.tag == 1 ) {
             activeBuildingRoomArray = wc1Rooms

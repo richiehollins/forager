@@ -37,30 +37,41 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBOutlet weak var photoPreview: UIImageView!
     @IBOutlet weak var deletePhotoButton: UIButton!
     
-    var titleLabelOrigin: CGPoint!
-    var titleInputOrigin: CGPoint!
-    var descriptionLabelOrigin: CGPoint!
-    var descriptionInputOrigin: CGPoint!
-    var feedsLabelOrigin: CGPoint!
-    var feedsInputOrigin: CGPoint!
-    var locationButtonOrigin: CGPoint!
+    @IBOutlet weak var titleLabelTopContraint: NSLayoutConstraint!
+    @IBOutlet weak var titleInputTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var descriptionInputTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var feedsLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var feedsInputTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var locationLabelTopConsraint: NSLayoutConstraint!
+    @IBOutlet weak var locationButtonTopConstraint: NSLayoutConstraint!
+    
+    var titleLabelTopConstraintDefault: CGFloat!
+    var titleInputTopConstraintDefault: CGFloat!
+    var descriptionLabelTopConstraintDefault: CGFloat!
+    var descriptionInputTopConstraintDefault: CGFloat!
+    var feedsLabelTopConstraintDefault: CGFloat!
+    var feedsInputTopConstraintDefault: CGFloat!
+    var locationLabelTopConstraintDefault: CGFloat!
+    var locationButtonTopConstraintDefault: CGFloat!
     
     var scrapImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLabelOrigin = titleLabel.frame.origin
-        titleInputOrigin = titleInput.frame.origin
-        descriptionLabelOrigin = descriptionLabel.frame.origin
-        descriptionInputOrigin = descriptionInput.frame.origin
-        feedsLabelOrigin = feedsLabel.frame.origin
-        feedsInputOrigin = feedsInput.frame.origin
-        locationButtonOrigin = locationButton.frame.origin
+        titleLabelTopConstraintDefault = titleLabelTopContraint.constant
+        titleInputTopConstraintDefault = titleInputTopConstraint.constant
+        descriptionLabelTopConstraintDefault = descriptionLabelTopConstraint.constant
+        descriptionInputTopConstraintDefault = descriptionInputTopConstraint.constant
+        feedsLabelTopConstraintDefault = feedsLabelTopConstraint.constant
+        feedsInputTopConstraintDefault = feedsInputTopConstraint.constant
+        locationLabelTopConstraintDefault = locationLabelTopConsraint.constant
+        locationButtonTopConstraintDefault = locationButtonTopConstraint.constant
         
-        titleLabel.frame.origin.y = titleLabelOrigin.y + 10
-        descriptionLabel.frame.origin.y = descriptionLabelOrigin.y + 10
-        feedsLabel.frame.origin.y = feedsLabelOrigin.y + 10
+        titleLabelTopContraint.constant = titleLabelTopConstraintDefault + 10
+        descriptionLabelTopConstraint.constant = descriptionLabelTopConstraintDefault + 10
+        feedsLabelTopConstraint.constant = feedsLabelTopConstraintDefault + 10
         
         titleInput.becomeFirstResponder()
         
@@ -76,9 +87,10 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
         } else {
             locationButton.setTitle("\(selectedBuilding) • \(selectedRoom)", forState: UIControlState.Normal)
             locationButton.alpha = 1
-            locationButton.frame.origin.y = locationButtonOrigin.y + 6
+            locationButtonTopConstraint.constant  = locationButtonTopConstraintDefault + 6
             locationLabel.alpha = 0.25
             view.endEditing(true)
+            view.layoutIfNeeded()
         }
     }
     
@@ -86,17 +98,19 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBAction func titleInputDidChange(sender: UITextField) {
         if titleInput.hasText() {
             UIView.animateWithDuration(0.2, animations: {
-                self.titleInput.frame.origin.y = self.titleInputOrigin.y + 15
+                self.titleInputTopConstraint.constant = self.titleInputTopConstraintDefault + 15
                 self.titleLabel.alpha = 0.25
-                self.titleLabel.frame.origin.y = self.titleLabelOrigin.y
+                self.titleLabelTopContraint.constant = self.titleLabelTopConstraintDefault
                 self.titleSupporter.alpha = 0
+                self.view.layoutIfNeeded()
             })
         } else {
             UIView.animateWithDuration(0.2, animations: {
                 self.titleLabel.alpha = 0
-                self.titleLabel.frame.origin.y = self.titleLabelOrigin.y + 10
-                self.titleInput.frame.origin.y = self.titleInputOrigin.y
+                self.titleLabelTopContraint.constant = self.titleLabelTopConstraintDefault + 10
+                self.titleInputTopConstraint.constant = self.titleInputTopConstraintDefault
                 self.titleSupporter.alpha = 0.25
+                self.view.layoutIfNeeded()
             })
         }
     }
@@ -107,17 +121,19 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     @IBAction func descriptionInputDidChange(sender: UITextField) {
         if descriptionInput.hasText() {
             UIView.animateWithDuration(0.2, animations: {
-                self.descriptionInput.frame.origin.y = self.descriptionInputOrigin.y + 15
+                self.descriptionInputTopConstraint.constant = self.descriptionInputTopConstraintDefault + 15
                 self.descriptionLabel.alpha = 0.25
-                self.descriptionLabel.frame.origin.y = self.descriptionLabelOrigin.y
+                self.descriptionLabelTopConstraint.constant = self.descriptionLabelTopConstraintDefault
                 self.descriptionSupporter.alpha = 0
+                self.view.layoutIfNeeded()
             })
         } else {
             UIView.animateWithDuration(0.2, animations: {
                 self.descriptionLabel.alpha = 0
-                self.descriptionLabel.frame.origin.y = self.descriptionLabelOrigin.y + 10
-                self.descriptionInput.frame.origin.y = self.descriptionInputOrigin.y
+                self.descriptionLabelTopConstraint.constant = self.descriptionLabelTopConstraintDefault + 10
+                self.descriptionInputTopConstraint.constant = self.descriptionInputTopConstraintDefault
                 self.descriptionSupporter.alpha = 0.25
+                self.view.layoutIfNeeded()
             })
         }
     }
@@ -127,16 +143,18 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     @IBAction func feedsInputDidChange(sender: AnyObject) {
         if feedsInput.hasText() {
-            UIView.animateWithDuration(0.2, animations: { 
-                self.feedsInput.frame.origin.y = self.feedsInputOrigin.y + 6
+            UIView.animateWithDuration(0.2, animations: {
+                self.feedsInputTopConstraint.constant = self.feedsInputTopConstraintDefault + 6
                 self.feedsLabel.alpha = 0.25
-                self.feedsLabel.frame.origin.y = self.feedsLabelOrigin.y
+                self.feedsLabelTopConstraint.constant = self.feedsLabelTopConstraintDefault
+                self.view.layoutIfNeeded()
             })
         } else {
             UIView.animateWithDuration(0.2, animations: {
-                self.feedsInput.frame.origin.y = self.feedsInputOrigin.y
+                self.feedsInputTopConstraint.constant = self.feedsInputTopConstraintDefault
                 self.feedsLabel.alpha = 0
-                self.feedsLabel.frame.origin.y = self.feedsLabelOrigin.y + 10
+                self.feedsLabelTopConstraint.constant = self.feedsLabelTopConstraintDefault + 10
+                self.view.layoutIfNeeded()
             })
         }
     }
