@@ -32,6 +32,8 @@
 		38C79A471CDA8F75006D41C4 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */; };
 		38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */; };
 		38C79A4F1CDC3652006D41C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38C79A4E1CDC3652006D41C4 /* Main.storyboard */; };
+		38FDB3C71CE4F8D1007F5562 /* FTUXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */; };
+		38FDB3C91CE50AAE007F5562 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDB3C81CE50AAE007F5562 /* Common.swift */; };
 		38FDCF441CDD106D00B79314 /* HomeNoImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDCF431CDD106D00B79314 /* HomeNoImageTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeetsViewController.swift; sourceTree = "<group>"; };
 		38C79A4E1CDC3652006D41C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTUXViewController.swift; sourceTree = "<group>"; };
+		38FDB3C81CE50AAE007F5562 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		38FDCF431CDD106D00B79314 /* HomeNoImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNoImageTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +118,8 @@
 				382069361CD2FCE80049F438 /* Bolts.framework */,
 				382069371CD2FCE80049F438 /* Parse.framework */,
 				38C79A4E1CDC3652006D41C4 /* Main.storyboard */,
+				38FDB3C81CE50AAE007F5562 /* Common.swift */,
+				38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */,
 				386D333B1CD6F4C7008FD64F /* LocationViewController.swift */,
 				386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */,
 				386D33391CD66595008FD64F /* ShareViewController.swift */,
@@ -226,8 +232,10 @@
 				38FDCF441CDD106D00B79314 /* HomeNoImageTableViewCell.swift in Sources */,
 				38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */,
 				386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */,
+				38FDB3C91CE50AAE007F5562 /* Common.swift in Sources */,
 				386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */,
 				38C79A471CDA8F75006D41C4 /* HomeTableViewCell.swift in Sources */,
+				38FDB3C71CE4F8D1007F5562 /* FTUXViewController.swift in Sources */,
 				382069271CD2F6E10049F438 /* ViewController.swift in Sources */,
 				382069251CD2F6E10049F438 /* AppDelegate.swift in Sources */,
 				386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */,
