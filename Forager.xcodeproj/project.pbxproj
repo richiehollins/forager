@@ -24,6 +24,9 @@
 		3820694D1CD301310049F438 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3820694C1CD301310049F438 /* libsqlite3.tbd */; };
 		383673291CD457D0000A85EF /* GothamRounded-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 383673271CD457D0000A85EF /* GothamRounded-Bold.otf */; };
 		3836732A1CD457D0000A85EF /* GothamRounded-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 383673281CD457D0000A85EF /* GothamRounded-Medium.otf */; };
+		383F1EDD1CE529A500A7159E /* FTUX4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F1EDC1CE529A500A7159E /* FTUX4ViewController.swift */; };
+		383F1EDF1CE6580400A7159E /* FirstTimeUXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383F1EDE1CE6580400A7159E /* FirstTimeUXViewController.swift */; };
+		383F1EE11CE65AF800A7159E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 383F1EE01CE65AF800A7159E /* Main.storyboard */; };
 		386D33381CD661C1008FD64F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D33371CD661C1008FD64F /* HomeViewController.swift */; };
 		386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D33391CD66595008FD64F /* ShareViewController.swift */; };
 		386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D333B1CD6F4C7008FD64F /* LocationViewController.swift */; };
@@ -31,7 +34,6 @@
 		38A54AFC1CDD218E003F2162 /* DeetsNoImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A54AFB1CDD218E003F2162 /* DeetsNoImageViewController.swift */; };
 		38C79A471CDA8F75006D41C4 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */; };
 		38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */; };
-		38C79A4F1CDC3652006D41C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38C79A4E1CDC3652006D41C4 /* Main.storyboard */; };
 		38FDB3C71CE4F8D1007F5562 /* FTUXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */; };
 		38FDB3C91CE50AAE007F5562 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDB3C81CE50AAE007F5562 /* Common.swift */; };
 		38FDCF441CDD106D00B79314 /* HomeNoImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDCF431CDD106D00B79314 /* HomeNoImageTableViewCell.swift */; };
@@ -58,6 +60,9 @@
 		3820694C1CD301310049F438 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		383673271CD457D0000A85EF /* GothamRounded-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Bold.otf"; sourceTree = "<group>"; };
 		383673281CD457D0000A85EF /* GothamRounded-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GothamRounded-Medium.otf"; sourceTree = "<group>"; };
+		383F1EDC1CE529A500A7159E /* FTUX4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTUX4ViewController.swift; sourceTree = "<group>"; };
+		383F1EDE1CE6580400A7159E /* FirstTimeUXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstTimeUXViewController.swift; sourceTree = "<group>"; };
+		383F1EE01CE65AF800A7159E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		386D33371CD661C1008FD64F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		386D33391CD66595008FD64F /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		386D333B1CD6F4C7008FD64F /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +70,6 @@
 		38A54AFB1CDD218E003F2162 /* DeetsNoImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeetsNoImageViewController.swift; sourceTree = "<group>"; };
 		38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeetsViewController.swift; sourceTree = "<group>"; };
-		38C79A4E1CDC3652006D41C4 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTUXViewController.swift; sourceTree = "<group>"; };
 		38FDB3C81CE50AAE007F5562 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		38FDCF431CDD106D00B79314 /* HomeNoImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeNoImageTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,8 +121,10 @@
 				382069261CD2F6E10049F438 /* ViewController.swift */,
 				382069361CD2FCE80049F438 /* Bolts.framework */,
 				382069371CD2FCE80049F438 /* Parse.framework */,
-				38C79A4E1CDC3652006D41C4 /* Main.storyboard */,
+				383F1EDE1CE6580400A7159E /* FirstTimeUXViewController.swift */,
+				383F1EDC1CE529A500A7159E /* FTUX4ViewController.swift */,
 				38FDB3C81CE50AAE007F5562 /* Common.swift */,
+				383F1EE01CE65AF800A7159E /* Main.storyboard */,
 				38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */,
 				386D333B1CD6F4C7008FD64F /* LocationViewController.swift */,
 				386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */,
@@ -214,7 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3836732A1CD457D0000A85EF /* GothamRounded-Medium.otf in Resources */,
-				38C79A4F1CDC3652006D41C4 /* Main.storyboard in Resources */,
+				383F1EE11CE65AF800A7159E /* Main.storyboard in Resources */,
 				383673291CD457D0000A85EF /* GothamRounded-Bold.otf in Resources */,
 				3820692F1CD2F6E10049F438 /* LaunchScreen.storyboard in Resources */,
 				3820692C1CD2F6E10049F438 /* Assets.xcassets in Resources */,
@@ -230,6 +236,7 @@
 			files = (
 				38A54AFC1CDD218E003F2162 /* DeetsNoImageViewController.swift in Sources */,
 				38FDCF441CDD106D00B79314 /* HomeNoImageTableViewCell.swift in Sources */,
+				383F1EDD1CE529A500A7159E /* FTUX4ViewController.swift in Sources */,
 				38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */,
 				386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */,
 				38FDB3C91CE50AAE007F5562 /* Common.swift in Sources */,
@@ -240,6 +247,7 @@
 				382069251CD2F6E10049F438 /* AppDelegate.swift in Sources */,
 				386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */,
 				386D33381CD661C1008FD64F /* HomeViewController.swift in Sources */,
+				383F1EDF1CE6580400A7159E /* FirstTimeUXViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

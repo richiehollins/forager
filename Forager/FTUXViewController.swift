@@ -36,12 +36,12 @@ class FTUXViewController: UIViewController, UIScrollViewDelegate {
         scrollView.delegate = self
         
         ftuxVC1 = storyboard.instantiateViewControllerWithIdentifier("FTUX1")
-        ftuxVC1.view.frame.origin.x = 4
+        ftuxVC1.view.frame.origin.x = self.view.frame.origin.x
         ftuxVC2 = storyboard.instantiateViewControllerWithIdentifier("FTUX2")
         ftuxVC2.view.frame.origin.x = view.frame.size.width
         ftuxVC3 = storyboard.instantiateViewControllerWithIdentifier("FTUX3")
         ftuxVC3.view.frame.origin.x = view.frame.size.width * 2
-        ftuxVC4 = storyboard.instantiateViewControllerWithIdentifier("FTUX4")
+        ftuxVC4 = storyboard.instantiateViewControllerWithIdentifier("FTUX4") as! FTUX4ViewController
         ftuxVC4.view.frame.origin.x = view.frame.size.width * 3
         
         scrollView.addSubview(ftuxVC1.view)
@@ -50,6 +50,14 @@ class FTUXViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(ftuxVC4.view)
         
         scrollView.layoutIfNeeded()
+        //scrollView.updateConstraints()
+        
+        throwFood("orange", width: 34, height: 41, x: 0.83, y: -200, rotation: 200, delay: 0.5, speed: 3.25)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,6 +77,21 @@ class FTUXViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func throwFood(image:String, width:Int, height:Int, x:Double, y:Int, rotation:Double, delay:Double, speed:Double) {
+        let imageView = UIImageView(image: UIImage(named: image))
+        let theX = x * Double(view.frame.size.width)
+        let theXInt = Int(theX)
+        imageView.frame = CGRect(x: theXInt, y: y, width: width, height: height)
+        ftuxVC4.view.addSubview(imageView)
+        //ftuxVC4.view.sendSubviewToBack(imageView)
+        UIView.animateWithDuration(speed, delay: delay, options: [.CurveLinear, .Repeat], animations: {
+            imageView.frame.origin.y = self.view.frame.size.height
+            let theRotation = CGFloat(rotation * M_PI / 180)
+            imageView.transform = CGAffineTransformRotate(imageView.transform, theRotation)
+        }) { (Bool) in
+            imageView.removeFromSuperview()
+        }
+    }
 
     /*
     // MARK: - Navigation
