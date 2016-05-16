@@ -10,6 +10,8 @@ import UIKit
 import Parse
 import Bolts
 
+let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

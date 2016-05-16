@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import Bolts
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var objectIDToPass: String!
     
     var objects: [PFObject]! = [PFObject]()
+    var returnedNoResults: Bool!
     
     
     lazy var refreshControl: UIRefreshControl = {
@@ -46,15 +47,22 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let midnightOfToday = cal?.startOfDayForDate(now)
         
-        
+        refreshControl.beginRefreshing()
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
         //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.objects = objects
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
 
+        if launchedBefore {
+            print("not the first launch")
+        } else {
+            self.performSegueWithIdentifier("showFTUXFlow", sender: self)
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+        }
     }
     
     
@@ -71,7 +79,9 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
         //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+        refreshControl.beginRefreshing()
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+            self.refreshControl.endRefreshing()
             self.objects = objects
             self.tableView.reloadData()
         }
@@ -80,76 +90,90 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects!.count
+        if (objects != nil) {
+            if objects!.count == 0 {
+                returnedNoResults = true
+                return 1
+            }
+            returnedNoResults = false
+            return objects!.count
+        } else {
+            returnedNoResults = true
+            return 1
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        let imageFile = objects[indexPath.row]["image"] as? PFFile
         
-        if (imageFile != nil) {
+        if (returnedNoResults == true) {
+            let cell = tableView.dequeueReusableCellWithIdentifier("EmptyTableViewCell")!
+            return cell
+        } else {
+            let imageFile = objects[indexPath.row]["image"] as? PFFile
             
-            let cell = tableView.dequeueReusableCellWithIdentifier("HomeTableViewCell") as! HomeTableViewCell
-            
-            imageFile!.getDataInBackgroundWithBlock {
-                (imageData: NSData?, error: NSError?) -> Void in
-                if error == nil {
-                    if let imageData = imageData {
-                        let image = UIImage(data:imageData)
-                        cell.scrapImage.image = image
+            if (imageFile != nil) {
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("HomeTableViewCell") as! HomeTableViewCell
+                
+                imageFile!.getDataInBackgroundWithBlock {
+                    (imageData: NSData?, error: NSError?) -> Void in
+                    if error == nil {
+                        if let imageData = imageData {
+                            let image = UIImage(data:imageData)
+                            cell.scrapImage.image = image
+                        }
                     }
                 }
+                
+                let time = objects[indexPath.row].createdAt!
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "h:mm a"
+                let timeString = dateFormatter.stringFromDate(time)
+                
+                let title = objects[indexPath.row]["title"] as! String
+                let building = objects[indexPath.row]["building"] as! String
+                let room = objects[indexPath.row]["room"] as! String
+                let feeds = objects[indexPath.row]["feeds"].stringValue
+                let description = objects[indexPath.row]["description"] as! String
+                let objectID = objects[indexPath.row].objectId
+                
+                cell.timeLabel.text = timeString
+                cell.titleLabel.text = title
+                cell.locationLabel.text = "\(building) • \(room)".uppercaseString
+                cell.feedsLabel.text = feeds
+                cell.descriptionLabel.text = description
+                cell.idLabel.text = objectID
+                cell.takeScrapButton.tag = indexPath.row
+                
+                return cell
+                
+            } else {
+                
+                let cell = tableView.dequeueReusableCellWithIdentifier("HomeNoImageTableViewCell") as! HomeNoImageTableViewCell
+                
+                let time = objects[indexPath.row].createdAt!
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "h:mm a"
+                let timeString = dateFormatter.stringFromDate(time)
+                
+                let title = objects[indexPath.row]["title"] as! String
+                let building = objects[indexPath.row]["building"] as! String
+                let room = objects[indexPath.row]["room"] as! String
+                let feeds = objects[indexPath.row]["feeds"].stringValue
+                let description = objects[indexPath.row]["description"] as! String
+                let objectID = objects[indexPath.row].objectId
+                
+                cell.timeLabel.text = timeString
+                cell.titleLabel.text = title
+                cell.locationLabel.text = "\(building) • \(room)".uppercaseString
+                cell.feedsLabel.text = feeds
+                cell.descriptionLabel.text = description
+                cell.idLabel.text = objectID
+                cell.takeScrapButton.tag = indexPath.row
+                
+                return cell
             }
-            
-            let time = objects[indexPath.row].createdAt!
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "h:mm a"
-            let timeString = dateFormatter.stringFromDate(time)
-            
-            let title = objects[indexPath.row]["title"] as! String
-            let building = objects[indexPath.row]["building"] as! String
-            let room = objects[indexPath.row]["room"] as! String
-            let feeds = objects[indexPath.row]["feeds"].stringValue
-            let description = objects[indexPath.row]["description"] as! String
-            let objectID = objects[indexPath.row].objectId
-            
-            cell.timeLabel.text = timeString
-            cell.titleLabel.text = title
-            cell.locationLabel.text = "\(building) • \(room)".uppercaseString
-            cell.feedsLabel.text = feeds
-            cell.descriptionLabel.text = description
-            cell.idLabel.text = objectID
-            cell.takeScrapButton.tag = indexPath.row
-            
-            return cell
-            
-        } else {
-            
-            let cell = tableView.dequeueReusableCellWithIdentifier("HomeNoImageTableViewCell") as! HomeNoImageTableViewCell
-            
-            let time = objects[indexPath.row].createdAt!
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "h:mm a"
-            let timeString = dateFormatter.stringFromDate(time)
-            
-            let title = objects[indexPath.row]["title"] as! String
-            let building = objects[indexPath.row]["building"] as! String
-            let room = objects[indexPath.row]["room"] as! String
-            let feeds = objects[indexPath.row]["feeds"].stringValue
-            let description = objects[indexPath.row]["description"] as! String
-            let objectID = objects[indexPath.row].objectId
-            
-            cell.timeLabel.text = timeString
-            cell.titleLabel.text = title
-            cell.locationLabel.text = "\(building) • \(room)".uppercaseString
-            cell.feedsLabel.text = feeds
-            cell.descriptionLabel.text = description
-            cell.idLabel.text = objectID
-            cell.takeScrapButton.tag = indexPath.row
-            
-            return cell
         }
-       
 
     }
     

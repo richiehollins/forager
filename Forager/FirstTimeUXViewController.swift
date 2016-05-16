@@ -14,8 +14,14 @@ class FirstTimeUXViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var paginationDots: UIPageControl!
     @IBOutlet weak var fourthScreen: UIView!
     @IBOutlet weak var theButton: UIButton!
+    @IBOutlet weak var inPhoneScrollView: UIScrollView!
+    @IBOutlet weak var jumpyRickyImageView: UIImageView!
+    @IBOutlet weak var littlePinkFilledRickyFace: UIImageView!
+    @IBOutlet weak var pulsingWhiteCircle: UIImageView!
     
+    var timesYouveScrolledToPage3: Int = 0
     var timesYouveScrolledToPage4: Int = 0
+    var rickyOrigin: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +30,9 @@ class FirstTimeUXViewController: UIViewController, UIScrollViewDelegate {
         masterScrollView.delegate = self
         
         theButton.layer.cornerRadius = 10
+        
+        rickyOrigin = jumpyRickyImageView.frame.origin.y
+        whiteCirclePulse()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +45,12 @@ class FirstTimeUXViewController: UIViewController, UIScrollViewDelegate {
         let page : Int = Int(round(scrollView.contentOffset.x / pageWidth))
         paginationDots.currentPage = page
         
-        if page == 3 {
+        if page == 2 {
+            if timesYouveScrolledToPage3 < 1 {
+                page3Animation()
+            }
+            timesYouveScrolledToPage3 += 1
+        } else if page == 3 {
             paginationDots.hidden = true
             if timesYouveScrolledToPage4 < 1 {
                 throwAllTheFoods()
@@ -78,9 +92,59 @@ class FirstTimeUXViewController: UIViewController, UIScrollViewDelegate {
             imageView.removeFromSuperview()
         }
     }
+    
+    func page3Animation() {
+        UIView.animateWithDuration(1.5, delay: 0, options: [], animations: {
+            self.inPhoneScrollView.contentOffset.y = 177
+            }) { (Bool) in
+                delay(1.5, closure: { 
+                    self.rickyJumps()
+                })
+        }
+    }
+    
+    func rickyJumps() {
+        self.jumpyRickyImageView.frame.size = CGSize(width: 117, height: 168)
+        jumpyRickyImageView.image = UIImage(named: "rickyBackJump")
+        UIView.animateWithDuration(0.25, delay: 0, options: [.CurveEaseOut], animations: {
+            self.jumpyRickyImageView.frame.origin.y = self.rickyOrigin - 34
+            }) { (Bool) in
+                self.filledRickyFacePops()
+                UIView.animateWithDuration(0.25, delay: 0, options: [.CurveEaseIn], animations: {
+                    self.jumpyRickyImageView.frame.origin.y = self.rickyOrigin
+                    }, completion: { (Bool) in
+                        self.jumpyRickyImageView.frame.size = CGSize(width:115, height:151)
+                        self.jumpyRickyImageView.image = UIImage(named: "rickyBack")
+                        delay(1.0, closure: {
+                            self.rickyJumps()
+                        })
+                })
+        }
+    }
+    
+    func filledRickyFacePops() {
+        littlePinkFilledRickyFace.alpha = 1
+        UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { 
+            self.littlePinkFilledRickyFace.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            self.littlePinkFilledRickyFace.alpha = 0
+            }) { (Bool) in
+                self.littlePinkFilledRickyFace.transform = CGAffineTransformMakeScale(1, 1)
+        }
+    }
+    
+    func whiteCirclePulse() {
+        UIView.animateWithDuration(1.25, delay: 0, options: [], animations: {
+            self.pulsingWhiteCircle.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            self.pulsingWhiteCircle.alpha = 0
+            }) { (Bool) in
+                self.pulsingWhiteCircle.transform = CGAffineTransformMakeScale(1, 1)
+                self.pulsingWhiteCircle.alpha = 0.8
+                self.whiteCirclePulse()
+        }
+    }
 
     @IBAction func tappedTheButton(sender: AnyObject) {
-        dismissViewControllerAnimated(true) { 
+        self.dismissViewControllerAnimated(true) {
             
         }
     }

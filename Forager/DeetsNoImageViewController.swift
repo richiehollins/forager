@@ -54,16 +54,31 @@ class DeetsNoImageViewController: UIViewController {
         feedsPassedInt = feedsPassedInt - 1
         feedsPassed = String(feedsPassedInt)
         
-        let query = PFQuery(className:"Scrap")
-        query.getObjectInBackgroundWithId(objectIDPassed) {
-            (scrapObject: PFObject?, error: NSError?) -> Void in
-            if error != nil {
-                print(error)
-            } else if let scrapObject = scrapObject {
-                scrapObject["feeds"] = self.feedsPassedInt
-                scrapObject.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
-                    self.theFeeds.text = "FEEDS \(self.feedsPassed)"
-                })
+        if feedsPassedInt == 0 {
+            self.theFeeds.text = "FEEDS \(self.feedsPassed)"
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectIDPassed) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                }
+            }
+        } else {
+            let query = PFQuery(className:"Scrap")
+            query.getObjectInBackgroundWithId(objectIDPassed) {
+                (scrapObject: PFObject?, error: NSError?) -> Void in
+                if error != nil {
+                    print(error)
+                } else if let scrapObject = scrapObject {
+                    scrapObject["feeds"] = self.feedsPassedInt
+                    scrapObject.saveInBackgroundWithBlock({ (success: Bool, error: NSError?) in
+                        self.theFeeds.text = "FEEDS \(self.feedsPassed)"
+                    })
+                }
             }
         }
     }
