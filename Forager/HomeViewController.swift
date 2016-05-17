@@ -36,26 +36,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.addSubview(self.refreshControl)
         
-        let now = NSDate()
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let midnightOfToday = cal?.startOfDayForDate(now)
-        
         refreshControl.beginRefreshing()
-        
-        let query = PFQuery(className:"Scrap")
-        query.orderByDescending("createdAt")
-        //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
-        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
-            self.objects = objects
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
-        }
 
         if launchedBefore {
             print("not the first launch")
@@ -64,6 +51,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
         }
     }
+    
+    
     
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -75,10 +64,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    
+    
     override func viewWillAppear(animated: Bool) {
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
-        //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+        let now = NSDate()
+        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let midnightOfToday = cal?.startOfDayForDate(now)
+        query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
         refreshControl.beginRefreshing()
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.refreshControl.endRefreshing()
@@ -89,19 +83,26 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (objects != nil) {
             if objects!.count == 0 {
                 returnedNoResults = true
+                print("objects != nil")
                 return 1
             }
             returnedNoResults = false
             return objects!.count
         } else {
             returnedNoResults = true
+            print("objects = nil")
             return 1
+            
         }
     }
+    
+    
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -178,19 +179,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    /*func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if returnedNoResults == true {
-            let cell = tableView.dequeueReusableCellWithIdentifier("EmptyTableViewCell") as! SuperEmptyTableViewCell
-            cell.emptyImage.image = animatedImage
-            cell.emptyImage.startAnimating()
-        }
-    }*/
     
     
     func handleRefresh(refreshControl: UIRefreshControl) {
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
-        //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+        let now = NSDate()
+        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let midnightOfToday = cal?.startOfDayForDate(now)
+        query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.objects = objects
             self.tableView.reloadData()
@@ -234,20 +231,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if error != nil {
                     print(error)
                 } else if let scrapObject = scrapObject {
+                    selectedCell.feedsLabel.text = "0"
                     scrapObject.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
                         UIView.animateWithDuration(0.3, animations: { 
                             selectedCell.frame.origin.x = -320
                             selectedCell.alpha = 0
                             }, completion: { (Bool) in
-                                let query = PFQuery(className:"Scrap")
-                                query.orderByDescending("createdAt")
-                                //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
-                                query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
-                                    self.objects = objects
-                                    self.tableView.reloadData()
-                                }
+                                self.handleRefresh(self.refreshControl)
                         })
-                        //self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:selectedRowIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
                     })
                 }
             }
@@ -300,20 +291,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if error != nil {
                     print(error)
                 } else if let scrapObject = scrapObject {
+                    selectedCell.feedsLabel.text = "0"
                     scrapObject.deleteInBackgroundWithBlock({ (success:Bool, error:NSError?) in
                         UIView.animateWithDuration(0.3, animations: {
                             selectedCell.frame.origin.x = -320
                             selectedCell.alpha = 0
                             }, completion: { (Bool) in
-                                let query = PFQuery(className:"Scrap")
-                                query.orderByDescending("createdAt")
-                                //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
-                                query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
-                                    self.objects = objects
-                                    self.tableView.reloadData()
-                                }
+                                self.handleRefresh(self.refreshControl)
                         })
-                        //self.tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow:selectedRowIndex, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
                     })
                 }
             }
