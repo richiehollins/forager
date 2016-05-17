@@ -280,7 +280,7 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     
     func showErrorAlert() {
-        let alertController = UIAlertController(title: "Slow down there, Sparky.", message: "Can't share a scrap until you've at least added a title, location, and how many folks it will feed.", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: "Slow down, Speed Racer.", message: "Can't share a scrap until you've at least added a title, location, and how many folks it will feed.", preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Alrighty", style: .Cancel) { (action) in
             self.titleInput.isFirstResponder()
         }

@@ -25,7 +25,6 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var objects: [PFObject]! = [PFObject]()
     var returnedNoResults: Bool!
     
-    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(HomeViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -37,7 +36,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -48,6 +47,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let midnightOfToday = cal?.startOfDayForDate(now)
         
         refreshControl.beginRefreshing()
+        
         let query = PFQuery(className:"Scrap")
         query.orderByDescending("createdAt")
         //query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
@@ -106,7 +106,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if (returnedNoResults == true) {
-            let cell = tableView.dequeueReusableCellWithIdentifier("EmptyTableViewCell")!
+            let cell = tableView.dequeueReusableCellWithIdentifier("EmptyTableViewCell") as! SuperEmptyTableViewCell
             return cell
         } else {
             let imageFile = objects[indexPath.row]["image"] as? PFFile
@@ -178,6 +178,14 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    /*func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if returnedNoResults == true {
+            let cell = tableView.dequeueReusableCellWithIdentifier("EmptyTableViewCell") as! SuperEmptyTableViewCell
+            cell.emptyImage.image = animatedImage
+            cell.emptyImage.startAnimating()
+        }
+    }*/
+    
     
     func handleRefresh(refreshControl: UIRefreshControl) {
         let query = PFQuery(className:"Scrap")
@@ -186,8 +194,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
             self.objects = objects
             self.tableView.reloadData()
+            refreshControl.endRefreshing()
         }
-        refreshControl.endRefreshing()
     }
     
     
@@ -201,23 +209,23 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let feeds = selectedCell.feedsLabel.text
         var feedsInt = Int(feeds!)
         feedsInt = feedsInt! - 1
-
-        /* do the fancy image popping animation
-        sender.selected = true
-        let imagePopper = sender.imageView as UIImageView!
-        let imagePopperImage = UIImageView(image: imagePopper.image)
-        view.addSubview(imagePopperImage)
-        imagePopperImage.frame = sender.frame
-        imagePopperImage.center = sender.center
-        imagePopperImage.center.y += selectedCell.theCard.frame.origin.y
-        imagePopperImage.center.x += selectedCell.theCard.frame.origin.x
         
-        UIView.animateWithDuration(0.2, animations: {
-            imagePopperImage.transform = CGAffineTransformMakeScale(2.5, 2.5)
-            imagePopperImage.alpha = 0
-        }) { (Bool) in
-            imagePopperImage.removeFromSuperview()
-        }*/
+        // fancy selected animation
+        sender.selected = true
+        let selectedImageView = sender.imageView as UIImageView!
+        let imagePopper = UIImageView(image: selectedImageView.image)
+        selectedCell.addSubview(imagePopper)
+        imagePopper.frame = sender.frame
+        imagePopper.center = sender.center
+        imagePopper.center.y += (selectedCell.theCard.frame.origin.y - 8)
+        imagePopper.center.x += selectedCell.theCard.frame.origin.x
+        UIView.animateWithDuration(0.2, animations: { 
+            imagePopper.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            imagePopper.alpha = 0
+            }) { (Bool) in
+                imagePopper.removeFromSuperview()
+        }
+
         
         if feedsInt! == 0 {
             let query = PFQuery(className:"Scrap")
@@ -269,22 +277,21 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         var feedsInt = Int(feeds!)
         feedsInt = feedsInt! - 1
         
-        /* do the fancy image popping animation
+        // fancy selected animation
         sender.selected = true
-        let imagePopper = sender.imageView as UIImageView!
-        let imagePopperImage = UIImageView(image: imagePopper.image)
-        view.addSubview(imagePopperImage)
-        imagePopperImage.frame = sender.frame
-        imagePopperImage.center = sender.center
-        imagePopperImage.center.y += selectedCell.theCard.frame.origin.y
-        imagePopperImage.center.x += selectedCell.theCard.frame.origin.x
-        
+        let selectedImageView = sender.imageView as UIImageView!
+        let imagePopper = UIImageView(image: selectedImageView.image)
+        selectedCell.addSubview(imagePopper)
+        imagePopper.frame = sender.frame
+        imagePopper.center = sender.center
+        imagePopper.center.y += (selectedCell.theCard.frame.origin.y - 8)
+        imagePopper.center.x += selectedCell.theCard.frame.origin.x
         UIView.animateWithDuration(0.2, animations: {
-            imagePopperImage.transform = CGAffineTransformMakeScale(2.5, 2.5)
-            imagePopperImage.alpha = 0
-            }) { (Bool) in
-                imagePopperImage.removeFromSuperview()
-        }*/
+            imagePopper.transform = CGAffineTransformMakeScale(2.5, 2.5)
+            imagePopper.alpha = 0
+        }) { (Bool) in
+            imagePopper.removeFromSuperview()
+        }
         
         if feedsInt! == 0 { // if no scraps are left, delete that shit!
             let query = PFQuery(className:"Scrap")
@@ -333,31 +340,36 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let indexPath = tableView.indexPathForSelectedRow!
         
-        let imageFile = objects[indexPath.row]["image"] as? PFFile
-        
-        if (imageFile != nil) {
-            let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! HomeTableViewCell
-            
-            imageToPass = currentCell.scrapImage.image
-            timeToPass = currentCell.timeLabel.text
-            titleToPass = currentCell.titleLabel.text
-            descriptionToPass = currentCell.descriptionLabel.text
-            feedsToPass = currentCell.feedsLabel.text
-            locationToPass = currentCell.locationLabel.text
-            objectIDToPass = currentCell.idLabel.text
-            
-            self.performSegueWithIdentifier("ShowCellDeets", sender: self)
+        let theCurrentCell = tableView.cellForRowAtIndexPath(indexPath)
+        if theCurrentCell?.reuseIdentifier == "EmptyTableViewCell" {
+            return
         } else {
-            let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! HomeNoImageTableViewCell
+            let imageFile = objects[indexPath.row]["image"] as? PFFile
             
-            timeToPass = currentCell.timeLabel.text
-            titleToPass = currentCell.titleLabel.text
-            descriptionToPass = currentCell.descriptionLabel.text
-            feedsToPass = currentCell.feedsLabel.text
-            locationToPass = currentCell.locationLabel.text
-            objectIDToPass = currentCell.idLabel.text
-            
-            self.performSegueWithIdentifier("NoImageShowCellDeets", sender: self)
+            if (imageFile != nil) {
+                let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! HomeTableViewCell
+                
+                imageToPass = currentCell.scrapImage.image
+                timeToPass = currentCell.timeLabel.text
+                titleToPass = currentCell.titleLabel.text
+                descriptionToPass = currentCell.descriptionLabel.text
+                feedsToPass = currentCell.feedsLabel.text
+                locationToPass = currentCell.locationLabel.text
+                objectIDToPass = currentCell.idLabel.text
+                
+                self.performSegueWithIdentifier("ShowCellDeets", sender: self)
+            } else {
+                let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! HomeNoImageTableViewCell
+                
+                timeToPass = currentCell.timeLabel.text
+                titleToPass = currentCell.titleLabel.text
+                descriptionToPass = currentCell.descriptionLabel.text
+                feedsToPass = currentCell.feedsLabel.text
+                locationToPass = currentCell.locationLabel.text
+                objectIDToPass = currentCell.idLabel.text
+                
+                self.performSegueWithIdentifier("NoImageShowCellDeets", sender: self)
+            }
         }
         
         

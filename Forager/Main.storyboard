@@ -313,26 +313,26 @@
                                             <outlet property="titleLabel" destination="6VZ-KB-294" id="Eba-dj-t67"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EmptyTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmptyTableViewCell" rowHeight="180" id="ORf-X4-NfO">
-                                        <rect key="frame" x="0.0" y="338" width="600" height="180"/>
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="EmptyTableViewCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="EmptyTableViewCell" rowHeight="212" id="ORf-X4-NfO" customClass="SuperEmptyTableViewCell" customModule="Forager" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="338" width="600" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ORf-X4-NfO" id="0Nq-F6-sYK">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No scraps have been posted." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QW-an-jgV">
-                                                    <rect key="frame" x="15" y="160" width="570" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No scraps right now." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5QW-an-jgV">
+                                                    <rect key="frame" x="15" y="184" width="570" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="s9P-Wo-dRC"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="yK0-Gs-8nR">
-                                                    <rect key="frame" x="175" y="30" width="250" height="118"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="empty" translatesAutoresizingMaskIntoConstraints="NO" id="yK0-Gs-8nR">
+                                                    <rect key="frame" x="175" y="30" width="250" height="150"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="118" id="A71-F6-XL6"/>
+                                                        <constraint firstAttribute="height" constant="150" id="A71-F6-XL6"/>
                                                         <constraint firstAttribute="width" constant="250" id="XUK-Dv-p2y"/>
                                                     </constraints>
                                                 </imageView>
@@ -346,7 +346,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="yK0-Gs-8nR" secondAttribute="bottom" constant="24" id="i41-Ca-arK"/>
                                                 <constraint firstItem="yK0-Gs-8nR" firstAttribute="top" secondItem="0Nq-F6-sYK" secondAttribute="topMargin" constant="22" id="xMj-0X-ZLp"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="5QW-an-jgV" secondAttribute="trailing" constant="7" id="yV6-EE-Qpp"/>
-                                                <constraint firstItem="5QW-an-jgV" firstAttribute="top" secondItem="yK0-Gs-8nR" secondAttribute="bottom" constant="12" id="zqV-h8-LEb"/>
+                                                <constraint firstItem="5QW-an-jgV" firstAttribute="top" secondItem="yK0-Gs-8nR" secondAttribute="bottom" constant="4" id="zqV-h8-LEb"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -356,6 +356,10 @@
                                             </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.88589304690000004" green="0.89375990630000002" blue="0.91857784990000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="emptyImage" destination="yK0-Gs-8nR" id="Wal-Ke-4F4"/>
+                                            <outlet property="emptyLabel" destination="5QW-an-jgV" id="keg-hc-l6j"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -1014,15 +1018,7 @@
                                             <action selector="didChangeLocation:" destination="fgs-Lx-YVG" eventType="touchUpInside" id="2nc-Qh-7LY"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvy-SX-wJ5" userLabel="ActiveBar">
-                                        <rect key="frame" x="0.0" y="35" width="60" height="5"/>
-                                        <color key="backgroundColor" red="0.99449449777603149" green="0.94380873441696167" blue="0.29739284515380859" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="J3A-gB-NFx"/>
-                                            <constraint firstAttribute="height" constant="5" id="uBA-mI-xlu"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Teh-0k-fbm">
+                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Teh-0k-fbm">
                                         <rect key="frame" x="480" y="0.0" width="100" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Pte-R5-ugn"/>
@@ -1032,7 +1028,18 @@
                                         <state key="normal" title="COMMONS">
                                             <color key="titleColor" red="0.99989169836044312" green="1" blue="0.99988096952438354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didChangeLocation:" destination="fgs-Lx-YVG" eventType="touchUpInside" id="FKJ-X7-pRt"/>
+                                        </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uvy-SX-wJ5" userLabel="ActiveBar">
+                                        <rect key="frame" x="0.0" y="35" width="60" height="5"/>
+                                        <color key="backgroundColor" red="0.99449449777603149" green="0.94380873441696167" blue="0.29739284515380859" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="J3A-gB-NFx"/>
+                                            <constraint firstAttribute="height" constant="5" id="uBA-mI-xlu"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14340314269065857" green="0.58562165498733521" blue="0.76073580980300903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -1077,7 +1084,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jum-RJ-uym" id="nkL-aT-2qS">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="fdV-gL-1mh">
@@ -1120,8 +1127,10 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activeLocationIndicator" destination="Uvy-SX-wJ5" id="dXn-I5-4Kn"/>
+                        <outlet property="activeLocationIndicatorWidthConstraint" destination="J3A-gB-NFx" id="aZb-7N-Kpv"/>
                         <outlet property="activeLocationLeftMargin" destination="Vpq-BC-424" id="C1w-XJ-9Fr"/>
                         <outlet property="buildingScroller" destination="6VL-8T-dcQ" id="zzk-hj-UFA"/>
+                        <outlet property="commonsButton" destination="Teh-0k-fbm" id="3jd-CW-Etf"/>
                         <outlet property="tableView" destination="O8a-oL-KmB" id="hrv-Dt-VxV"/>
                         <outlet property="wc1Button" destination="WAJ-vE-elz" id="aaK-P6-n7G"/>
                         <outlet property="wc2Button" destination="01z-lo-Wzw" id="k5L-O0-1rk"/>
@@ -1494,7 +1503,7 @@ Tap to take a scrap so other foragers know how much is left.</string>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don’t let it go to waste! Be someone’s hero and share some scraps." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19q-k2-5nC">
                                                 <rect key="frame" x="25" y="505" width="550" height="36"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="36" id="nz6-q6-TbM"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="nz6-q6-TbM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="GothamRounded-Bold" family="Gotham Rounded" pointSize="14"/>
                                                 <color key="textColor" red="0.99989169840000003" green="1" blue="0.99988096950000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1664,7 +1673,7 @@ Currently a West Creek beta.</string>
         <image name="card 6" width="191" height="40"/>
         <image name="checkIcon" width="25" height="25"/>
         <image name="clock outline" width="20" height="20"/>
-        <image name="empty" width="250" height="118"/>
+        <image name="empty" width="250" height="133"/>
         <image name="line" width="290" height="3"/>
         <image name="littlePinkFilledRicky" width="23" height="18"/>
         <image name="littlePinkOutlineRicky" width="23" height="18"/>

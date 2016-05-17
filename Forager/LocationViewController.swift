@@ -22,6 +22,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var wc6Button: UIButton!
     @IBOutlet weak var wc7Button: UIButton!
     @IBOutlet weak var wc8Button: UIButton!
+    @IBOutlet weak var commonsButton: UIButton!
     
     var wc1Rooms: [String]!
     var wc2Rooms: [String]!
@@ -31,9 +32,11 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
     var wc6Rooms: [String]!
     var wc7Rooms: [String]!
     var wc8Rooms: [String]!
+    var commonsRooms: [String]!
     var activeBuildingRoomArray: [String]!
     
     
+    @IBOutlet weak var activeLocationIndicatorWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var activeLocationLeftMargin: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -53,6 +56,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         wc6Rooms = ["1st Floor Galley","2nd Floor Galley","3rd Floor Galley","4th Floor Galley","1101A: Shoreline","1101B: Brushlands","1102: Forest","1103: Mountain","1104: Pasture","1105: Pond","1106: Coastline","1108: Desert","1110: Ocean","1119: Quicksand","1120: Marshlands","1121: The Bayou","1122: Lake","1123: Prairie","1124: Tropics","1125: Canyon","1126: Glacier","1127: Cave","1128: Field","1129: Swamp","1150: Woodlands","1151: Cavern","1152: Dune","1155: Meadow","1159: Stream","1161: Valley","1163: Tundra","1166: River","2102: Neon","2103: Nitrogen","2104: Carnelian","2105: Argon","2107B: Bromine","2107C: Galena","2107D: Borax","2109: Quartz","2114: Brass","2119: Nickel","2120: Zinc","2125: Jasper","2127: Copper","2128: Diopside","2130: Hotel Enclave","2131: Nephrite","2132: Hotel Enclave","2134: Aluminum","2135: Helium","2136: Xenon","2137: Sulfur","2138: Carbon","2139: Electroid","2141: Hotel Enclave","2142: Hotel Enclave","2143: Cobalt","2157: Citrine","3102: Holly","3103: Mulberry","3105: White Oak","3107B: Basswood","3107C: Red Alder","3107D: Sassafras","3108: Chestnut","3111: LifeStyles","3112: Dove Tree","3114: Standard Conference Room","3119: Birch","3120: Elm","3121: Dogwood","3122: Standard Conference Room","3123: Red Maple","3124: Pine","3125: Cedar","3134: Sycamore","3136: Crape-Myrtle","3137: Cottonwood","3138: Cypress","3139: Hickory","3141: Hotel Enclave","3142: Hotel Enclave","3143: Buckeye","3155: Sweet Gum","3157: Standard Conference Room","4102: Cheetah","4103: Ermine","4104: Aardvark","4105: Jackrabbit","4106: Koala Bear","4107B: Badger","4107C: Baboon","4107D: Gecko","4108: Giant Panda","4109: Polar Bear","4110: Rhinoceros","4111: Bison","4112: Eland","4113: Grizzly Bear","4114: Bald Eagle","4119: Leopard","4120: Tiger","4121: Otter","4122: Manatee","4123: African Elephant","4124: Camel","4125: Tamari","4130C: Zebra","4134: Duiker","4135: Impala","4136: Bobcat","4137: Ostrich","4138: Gemsbok","4139: Elk","4141: Hotel Enclave","4142: Hotel Enclave","4143: Blue Whale","4150: Antelope","4151: Kudu","4152: Buzzard","4155: Wildebeest","4157: Gazelle"]
         wc7Rooms = ["1st Floor Galley","2nd Floor Galley","3rd Floor Galley","4th Floor Galley","1103: Tadpole","1104: Land Shark","1105: Sea Serpent","1109: Neptune","1110: Lionfish","1111: Parrotfish","1112: Minnow","1126: Mussel","1127: Man-O-War","1130: Hotel Enclave","1131: Hotel Enclave","1132: Largemouth Bass","1133A: Nagfish","1134: Clownfish","1135: Manta Ray","1136: Mermaid","1137: Globefish","1151: Salmon","1154: Squirrelfish","1155: Eagle Ray","1158: Catfish","1159: Flying Fish","1160: Goldfish","1162: Tartar Sauce","2103N","2103O","2103P","2103Q","2103R","2105: Spearfish","2110: Plankton","2152","2170","2171: Hotel Office","2172","2201: Disaster Recovery Room","2203: Wolffish","2205: Barnacle","2206: Coral","2211","2303: Hotel Office","2304: Trout","2401: Sturgeon","2427: Mackerel","3102: Anemone","3105: Great White","3107: Herring","3108: Angelfish","3109: Proteus","3111: Butterflyfish","3112: Sunfish","3126: Sanddollar","3127: Sand Flea","3128: Scallop","3130: Hotel Enclave","3131: Hotel Enclave","3132: Hammer Head","3133: Blow Fish","3134: Kingfish","3135: Stingray","3136: Glassfish","3138: Moray Eel","3139: Bluefish","3152: Conch","3153: Starfish","3156: Sponge","3157: Red Snapper","3163: Horseshoe Crab","3164: Amberjack","3176: Dolphin","3180: King Crab","3181: Hermit Crab","3183: Sea Urchin","3190","3195: Big Fish","3196: Alligator","3197: Crocodile","4102 Orca","4103: Pufferfish","4104: Cuttlefish","4105: Standard Conference Room","4106: Albatross","4108: Hotel Office","4109: Poseidon","4110: Manatee","4111: Seal","4112: Porpoise","4126: Jellyfish","4127: Walrus","4128: Sea Mouse","4130: Hotel Enclave","4131: Hotel Enclave","4132: Prawn","4134 Barracuda","4135: Penguin","4136: Coelacanth","4137: Sea Bass","4139: Blue Tang","4152: Lobster","4153: Sea Horse","4156: Walleye","4158: Tilapia","4159: Sea Otter","4160: Damselfish","4161","4163: Grass Carp","4176: Sea Lion","4177: Amoeba","4179: Seahawks","4180: Sea Bream","4181: Monkfish","4186: Sea Dragon","4187: Mollusk","4188: Skate","4191: Dogfish"]
         wc8Rooms = ["1st Floor Galley","2nd Floor Galley","3rd Floor Galley","4th Floor Galley","1110","1118","1120","1122","1124","1128","1158","1164","1172","1174","1178","1180","1182","1184","1185","1187","1188","1189","1190","1191","1192","1193","1194","1195","1196","1197","2001: Mother's Room","2100","2104","2106","2108","2110","2118","2120","2124","2128","2130: Presentation Room","2132: Video Conference Room","2134","2136","2142","2148","2152","2156","2158","2160","2162","2164","2166","2168","2172","2176","2178","2180","2182","2192","2194","2196","2197","2198","2199","3001: Mother's Room","3100","3102","3104","3106","3108","3110","3116","3118","3120","3122","3126","3128","3130: Presentation Room","3132: Video Conference Room","3134","3136","3142","3144","3154","3156","3158","3160","3164","3166","3168","3172","3174","3176","3178","3180","3182","3192","3194","3199","4001: Mother's Room","4102","4106","4116","4118","4122","4128","4130: Presentation Room","4132","4134","4142","4154","4156","4158","4160","4164","4172","4176","4192","4199"]
+        commonsRooms = ["272","273","274","275","276","277","278","279","280","281","Starbucks","Dining Area","PowerUp","Across from PowerUp","Bakery"]
         
         activeBuildingRoomArray = wc1Rooms
         
@@ -67,36 +71,42 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         if (selectedBuilding == "WC1") {
             UIView.animateWithDuration(0.3, animations: { 
                 self.activeLocationLeftMargin.constant = self.wc1Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc1Rooms
         } else if (selectedBuilding == "WC2") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc2Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc2Rooms
         } else if (selectedBuilding == "WC3") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc3Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc3Rooms
         } else if (selectedBuilding == "WC4") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc4Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc4Rooms
         } else if (selectedBuilding == "WC5") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc5Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc5Rooms
         } else if (selectedBuilding == "WC6") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc6Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.contentOffset.x = self.wc6Button.frame.origin.x - 200
                 self.buildingScroller.layoutIfNeeded()
             })
@@ -104,6 +114,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         } else if (selectedBuilding == "WC7") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc7Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.contentOffset.x = self.wc7Button.frame.origin.x - 200
                 self.buildingScroller.layoutIfNeeded()
             })
@@ -111,10 +122,18 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         } else if (selectedBuilding == "WC8") {
             UIView.animateWithDuration(0.3, animations: {
                 self.activeLocationLeftMargin.constant = self.wc8Button.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 60
                 self.buildingScroller.contentOffset.x = self.wc8Button.frame.origin.x - 200
                 self.buildingScroller.layoutIfNeeded()
             })
             activeBuildingRoomArray = wc8Rooms
+        } else if (selectedBuilding == "Commons") {
+            UIView.animateWithDuration(0.3, animations: {
+                self.activeLocationLeftMargin.constant = self.commonsButton.frame.origin.x
+                self.activeLocationIndicatorWidthConstraint.constant = 100
+                self.buildingScroller.contentOffset.x = self.commonsButton.frame.origin.x - 200
+                self.buildingScroller.layoutIfNeeded()
+            })
         }
         tableView.reloadData()
     }
@@ -127,6 +146,11 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
             //self.activeLocationIndicator.frame.origin.x = sender.frame.origin.x
             self.activeLocationLeftMargin.constant = sender.frame.origin.x
             self.buildingScroller.layoutIfNeeded()
+            if (sender.tag == 9) {
+                self.activeLocationIndicatorWidthConstraint.constant = 100
+            } else {
+                self.activeLocationIndicatorWidthConstraint.constant = 60
+            }
         }
         if ( sender.tag == 1 ) {
             activeBuildingRoomArray = wc1Rooms
@@ -152,6 +176,9 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         } else if ( sender.tag == 8) {
             activeBuildingRoomArray = wc8Rooms
             selectedBuilding = "WC8"
+        } else if ( sender.tag == 9 ) {
+            activeBuildingRoomArray = commonsRooms
+            selectedBuilding = "Commons"
         }
         tableView.reloadData()
         
