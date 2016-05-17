@@ -25,6 +25,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var objects: [PFObject]! = [PFObject]()
     var returnedNoResults: Bool!
     
+    var isFirstOfSession: Bool!
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(HomeViewController.handleRefresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
@@ -50,6 +52,8 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.performSegueWithIdentifier("showFTUXFlow", sender: self)
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
         }
+        
+        isFirstOfSession = true
     }
     
     
@@ -67,17 +71,25 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     override func viewWillAppear(animated: Bool) {
-        let query = PFQuery(className:"Scrap")
-        query.orderByDescending("createdAt")
-        let now = NSDate()
-        let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let midnightOfToday = cal?.startOfDayForDate(now)
-        query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
-        refreshControl.beginRefreshing()
-        query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
-            self.refreshControl.endRefreshing()
-            self.objects = objects
-            self.tableView.reloadData()
+        if isFirstOfSession == true {
+            let query = PFQuery(className:"Scrap")
+            query.orderByDescending("createdAt")
+            let now = NSDate()
+            let cal = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+            let midnightOfToday = cal?.startOfDayForDate(now)
+            query.whereKey("createdAt", greaterThanOrEqualTo: midnightOfToday!)
+            refreshControl.beginRefreshing()
+            query.findObjectsInBackgroundWithBlock { (objects: [PFObject]?, error: NSError?) -> Void in
+                delay(2.0, closure: {
+                    self.refreshControl.endRefreshing()
+                    delay(0.6, closure: {
+                        self.objects = objects
+                        self.tableView.reloadData()
+                    })
+                })
+            }
+        } else {
+            self.handleRefresh(refreshControl)
         }
     }
     
