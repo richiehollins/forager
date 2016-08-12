@@ -27,3 +27,16 @@ func convertValue(value: CGFloat, r1Min: CGFloat, r1Max: CGFloat, r2Min: CGFloat
     return value * ratio + r2Min - r1Min * ratio
 }
 
+func determineLocation(lat: Double, long: Double) -> String {
+    if ( (lat > 37.62 && lat < 37.641) && (long > -77.6808 && long < -77.6636) ) {
+        detectedLocation = "West Creek"
+    } else if ( (lat > 38.913 && lat < 38.916) && (long > -77.2219 && long < -77.2189) ) {
+        detectedLocation = "Towers"
+    } else if ( (lat > 38.923 && lat < 38.9254) && (long > -77.2148 && long < -77.21128) ) {
+        detectedLocation = "McLean"
+    } else {
+        detectedLocation = "Choose Location"
+        print("lat: \(lat) long: \(long)")
+    }
+    return detectedLocation
+}

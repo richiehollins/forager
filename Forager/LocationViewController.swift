@@ -214,8 +214,8 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         let indexPath = tableView.indexPathForSelectedRow!
         let currentCell = tableView.cellForRowAtIndexPath(indexPath)! as! LocationTableViewCell
         
-        selectedRoom = currentCell.locationTableCellLabel.text!
-        hasSelectedRoom = true
+        selectedCampus = currentCell.locationTableCellLabel.text!
+        hasSelectedCampus = true
         navigationController?.popViewControllerAnimated(true)
         
     }

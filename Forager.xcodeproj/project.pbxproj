@@ -31,6 +31,9 @@
 		386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D33391CD66595008FD64F /* ShareViewController.swift */; };
 		386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D333B1CD6F4C7008FD64F /* LocationViewController.swift */; };
 		386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */; };
+		3870FB721D5E0C7200F367CD /* ChooseBuildingFloorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3870FB711D5E0C7200F367CD /* ChooseBuildingFloorViewController.swift */; };
+		3896AD9D1D4FDA6B00F98DE1 /* ChooseLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3896AD9C1D4FDA6B00F98DE1 /* ChooseLocationViewController.swift */; };
+		3898C6FB1D52710A00ADDADA /* ChooseCampusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3898C6FA1D52710A00ADDADA /* ChooseCampusViewController.swift */; };
 		38A54AFC1CDD218E003F2162 /* DeetsNoImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A54AFB1CDD218E003F2162 /* DeetsNoImageViewController.swift */; };
 		38C79A471CDA8F75006D41C4 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */; };
 		38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */; };
@@ -68,6 +71,9 @@
 		386D33391CD66595008FD64F /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		386D333B1CD6F4C7008FD64F /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		3870FB711D5E0C7200F367CD /* ChooseBuildingFloorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseBuildingFloorViewController.swift; sourceTree = "<group>"; };
+		3896AD9C1D4FDA6B00F98DE1 /* ChooseLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseLocationViewController.swift; sourceTree = "<group>"; };
+		3898C6FA1D52710A00ADDADA /* ChooseCampusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseCampusViewController.swift; sourceTree = "<group>"; };
 		38A54AFB1CDD218E003F2162 /* DeetsNoImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeetsNoImageViewController.swift; sourceTree = "<group>"; };
 		38C79A461CDA8F75006D41C4 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		38C79A4C1CDC2E54006D41C4 /* DeetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeetsViewController.swift; sourceTree = "<group>"; };
@@ -82,10 +88,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				382069451CD3011E0049F438 /* CoreLocation.framework in Frameworks */,
 				3820694D1CD301310049F438 /* libsqlite3.tbd in Frameworks */,
 				3820694B1CD301260049F438 /* libz.tbd in Frameworks */,
 				382069441CD3011E0049F438 /* CoreGraphics.framework in Frameworks */,
-				382069451CD3011E0049F438 /* CoreLocation.framework in Frameworks */,
 				382069471CD3011E0049F438 /* Security.framework in Frameworks */,
 				382069481CD3011E0049F438 /* StoreKit.framework in Frameworks */,
 				382069491CD3011E0049F438 /* SystemConfiguration.framework in Frameworks */,
@@ -127,6 +133,9 @@
 				383F1EDC1CE529A500A7159E /* FTUX4ViewController.swift */,
 				38FDB3C81CE50AAE007F5562 /* Common.swift */,
 				383F1EE01CE65AF800A7159E /* Main.storyboard */,
+				3870FB711D5E0C7200F367CD /* ChooseBuildingFloorViewController.swift */,
+				3898C6FA1D52710A00ADDADA /* ChooseCampusViewController.swift */,
+				3896AD9C1D4FDA6B00F98DE1 /* ChooseLocationViewController.swift */,
 				38FDB3C61CE4F8D1007F5562 /* FTUXViewController.swift */,
 				386D333B1CD6F4C7008FD64F /* LocationViewController.swift */,
 				386D333D1CD7BCF7008FD64F /* LocationTableViewCell.swift */,
@@ -196,6 +205,7 @@
 					382069201CD2F6E10049F438 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = YX6A6ND332;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -241,6 +251,7 @@
 				38FDCF441CDD106D00B79314 /* HomeNoImageTableViewCell.swift in Sources */,
 				383F1EDD1CE529A500A7159E /* FTUX4ViewController.swift in Sources */,
 				38C79A4D1CDC2E54006D41C4 /* DeetsViewController.swift in Sources */,
+				3898C6FB1D52710A00ADDADA /* ChooseCampusViewController.swift in Sources */,
 				386D333E1CD7BCF7008FD64F /* LocationTableViewCell.swift in Sources */,
 				38FDB3C91CE50AAE007F5562 /* Common.swift in Sources */,
 				386D333C1CD6F4C7008FD64F /* LocationViewController.swift in Sources */,
@@ -251,6 +262,8 @@
 				382069251CD2F6E10049F438 /* AppDelegate.swift in Sources */,
 				386D333A1CD66595008FD64F /* ShareViewController.swift in Sources */,
 				386D33381CD661C1008FD64F /* HomeViewController.swift in Sources */,
+				3896AD9D1D4FDA6B00F98DE1 /* ChooseLocationViewController.swift in Sources */,
+				3870FB721D5E0C7200F367CD /* ChooseBuildingFloorViewController.swift in Sources */,
 				383F1EDF1CE6580400A7159E /* FirstTimeUXViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +381,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.richiehollins.Forager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -387,6 +401,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.richiehollins.Forager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

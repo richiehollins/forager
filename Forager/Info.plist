@@ -48,5 +48,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Forager needs your location to give you nearby food suggestions, only when you have the app open.</string>
 </dict>
 </plist>

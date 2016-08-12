@@ -9,10 +9,14 @@
 import UIKit
 import Parse
 import Bolts
+import CoreLocation
 
-class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    let locationManager = CLLocationManager()
+    var userLocationString: String = ""
     
     var imageToPass: UIImage!
     var timeToPass: String!
@@ -39,6 +43,15 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startMonitoringSignificantLocationChanges()
+            locationManager.startUpdatingLocation()
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -54,6 +67,18 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         
         isFirstOfSession = true
+    }
+    
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0] as CLLocation
+        let lat = userLocation.coordinate.latitude
+        let long = userLocation.coordinate.longitude
+        
+        // determine which building they're in
+        userLocationString = determineLocation(lat, long: long)
+        print(userLocationString)
+        //locationManager.stopUpdatingLocation()
     }
     
     

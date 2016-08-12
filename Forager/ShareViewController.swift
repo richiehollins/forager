@@ -10,9 +10,13 @@ import UIKit
 import Parse
 import Bolts
 
-var selectedRoom: String!
+var selectedCampus: String!
 var selectedBuilding: String!
-var hasSelectedRoom: Bool!
+var hasSelectedCampus: Bool!
+var detectedLocation: String!
+var selectedBuildingFloor: String!
+var hasSelectedBuildingFloor: Bool!
+var selectedRoom: String = ""
 
 class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -75,17 +79,18 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
         
         titleInput.becomeFirstResponder()
         
-        selectedRoom = ""
+        selectedCampus = ""
         selectedBuilding = ""
-        hasSelectedRoom = false
+        hasSelectedCampus = false
+        hasSelectedBuildingFloor = false
     }
     
     
     override func viewDidAppear(animated: Bool) {
-        if (selectedRoom == "") {
+        if (hasSelectedBuildingFloor == false) {
             locationButton.setTitle("Location?", forState: UIControlState.Normal)
         } else {
-            locationButton.setTitle("\(selectedBuilding) • \(selectedRoom)", forState: UIControlState.Normal)
+            locationButton.setTitle("\(selectedBuildingFloor) • \(selectedRoom)", forState: UIControlState.Normal)
             locationButton.alpha = 1
             locationButtonTopConstraint.constant  = locationButtonTopConstraintDefault + 6
             locationLabel.alpha = 0.25
@@ -179,7 +184,7 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     
     @IBAction func tappedCheck(sender: AnyObject) {
-        if (titleInput.hasText() && feedsInput.hasText() && hasSelectedRoom==true) {
+        if (titleInput.hasText() && feedsInput.hasText() && hasSelectedCampus==true) {
             
             let scrapObject = PFObject(className: "Scrap")
             
@@ -187,7 +192,7 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
             scrapObject["description"] = descriptionInput.text
             scrapObject["feeds"] = Int(feedsInput.text!)
             scrapObject["building"] = selectedBuilding
-            scrapObject["room"] = selectedRoom
+            scrapObject["room"] = selectedCampus
             
             var imageFile: PFFile!
             if (scrapImage != nil) {
@@ -198,7 +203,7 @@ class ShareViewController: UIViewController, UIImagePickerControllerDelegate, UI
                 let newImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
                 
-                let imageData = UIImageJPEGRepresentation(newImage, 0.5)
+                let imageData = UIImageJPEGRepresentation(newImage!, 0.5)
                 imageFile = PFFile(name:"image.png", data:imageData!)
                 
                 scrapObject["image"] = imageFile
